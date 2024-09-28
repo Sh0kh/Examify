@@ -2,7 +2,7 @@ import React from 'react'
 import foto from '../../images/heroImg1.png'
 function Hero() {
   return (
-    <section className='Hero pt-[100px]'>
+    <section className='Hero pt-[180px]'>
       <div className='Container'>
         <div className='Hero__wrapper flex items-center justify-between'>
           <div>

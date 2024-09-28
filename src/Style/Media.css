@@ -1,21 +1,49 @@
 @media(max-width:1100px) {
-    .Hero {
-        padding-top: 80px;
-    }
 
     .Hero h1 {
         font-size: 50px;
         line-height: 60px;
         width: 100%;
     }
-
     .Hero img {
         width: 500px !important;
+    }
+    .Test__wrapper{
+        grid-template-columns: repeat(3,1fr) !important;
+    }
+}
+@media(max-width:1050px){
+    .Top3__wrapper{
+        gap: 10px;
+        width: 100%;
+    }
+    .Top3__card{
+        padding: 10px;
+        width: 100%;
+    }
+    .Top3__card1{
+        padding: 25px;
+        width: 100%;
     }
 }
 @media(max-width:1000px){
     .Service__wrapper{
         grid-template-columns: repeat(2,1fr) !important;
+
+    }
+    .Service__Card2{
+        display: block;
+    }
+    .Service__wrapper2{
+        display: none !important;
+    }
+    .Result__wrapper{
+        width: 100% !important;
+    }
+}
+@media(max-width:950px){
+    .Contact h1{
+        width: auto;
     }
 }
 @media(max-width:900px) {
@@ -30,8 +58,33 @@
     .Hero button{
         margin: 0 auto;
     }
+    
 }
-
+@media(max-width:850px){
+    .Test__wrapper{
+        gap: 10px !important;
+    }
+    .Test__card{
+        height: 450px;
+    }
+}
+@media(max-width:760px){
+    .Test__wrapper{
+        grid-template-columns: repeat(2,1fr) !important;
+    }
+    .Test__card img:nth-child(2){
+        display: none;
+    }
+    .Top3__wrapper{
+        display: none;
+    }
+    .Top3__wrapper__mb{
+        display: flex !important;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
 @media(max-width:700px) {
     header .header__wrapper nav {
         display: none !important;
@@ -44,15 +97,131 @@
     .header__burger {
         display: block;
     }
-}
+    .Contact{
 
+        padding: 0px 15px;
+        padding-top: 70px;
+    }
+    .Contact form{
+        width: 100%;
+    }
+    .Contact h1{
+        font-size: 22px !important;
+    }
+}
+@media(max-width:600px){
+    .Service__wrapper{
+        grid-template-columns: repeat(1,1fr) !important;
+    }
+}
+@media(max-width:600px){
+    .HFAQ__wrapper{
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+@media(max-width:500px){
+    .Service h1{
+        font-size: 40px;
+    }
+    .Result h1{
+        font-size: 40px;
+    }
+    .HFAQ h1{
+        font-size: 40px;
+    }
+    .Contact form{
+        padding: 15px;
+    }
+}
+@media(max-width:470px){
+    .Test__wrapper{
+        grid-template-columns: repeat(1,1fr) !important;
+    }
+    .TestCard2{
+        display: none;
+    }
+    .Test__card{
+        height: auto
+    }
+}
+@media(max-width:450px){
+    .Login form {
+        gap: 10px;
+    }
+    .Login form input{
+        padding: 5px !important;
+    }
+    .RatingTable span{
+        font-size: 12px !important;
+    }
+    .MuiPaper-root{
+        padding: 0px !important;
+    }
+}
 @media(max-width:426px) {
     header .header__wrapper img {
         width: 120px !important;
+    }
+    footer img{
+        width: 120px !important;
+    }
+    footer{
+        padding: 10px 0px !important;
+    }
+}
+@media(max-width:400px){
+    .Service h1{
+        font-size: 30px;
+    }
+    .Result p{
+        font-size: 15px !important;
+    }
+    .Result h1{
+        font-size: 30px;
+    }
+    .Service__Card svg, .Service__Card2 svg{
+        font-size: 40px !important;
+    }
+    .Service__Card h3, .Service__Card2 h3{
+        font-size: 20px;
+    }
+    .Service__Card p, .Service__Card2 p{
+        font-size: 15px;
+    }
+    .Result__Card{
+        padding: 10px;
     }
 }
 @media(max-width:380px){
     .Hero h1{
         font-size: 40px;
+    }
+}
+@media(max-width:370px){
+    .Login form{
+        gap: 5px;
+    }
+    .Login form input {
+        padding: 1px !important;
+    }
+    .Result__Card span{
+        font-size: 15px;
+    }
+}
+@media(max-width:350px){
+    .RatingTable span{
+        font-size: 8px !important;
+    }
+}
+@media(max-width:335px){
+    .Login form input {
+        width: 40px;
+    }
+}
+@media(max-width:320px){
+    .Footer__wrapper{
+        flex-direction: column;
+        gap: 10px;
     }
 }
