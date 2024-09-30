@@ -11,6 +11,7 @@ import Test from './Pages/Test';
 import Contact from './Pages/Contact';
 import FAQ from './Pages/FAQ';
 import Rating from './Pages/Rating';
+import Book1 from './Components/Books/Book1/Book1';
 function App() {
   return (
     <Provider store={store}>
@@ -25,6 +26,8 @@ function App() {
               <Route path='/rating' element={<Rating/>}/>
             </Route>
             <Route path='/contact' element={<Contact/>}/>
+
+            <Route path='/book1' element={<Book1/>}/>
           </Route>
         </Routes>
       </Router>
