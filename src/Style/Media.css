@@ -25,6 +25,12 @@
         padding: 25px;
         width: 100%;
     }
+    .LoginModal{
+        width: 50%;
+    }
+    .TestModal{
+        width: 30%;
+    }
 }
 @media(max-width:1000px){
     .Service__wrapper{
@@ -84,6 +90,9 @@
         flex-direction: column;
         gap: 20px;
     }
+    .LoginModal{
+        width: 70%;
+    }
 }
 @media(max-width:700px) {
     header .header__wrapper nav {
@@ -108,16 +117,34 @@
     .Contact h1{
         font-size: 22px !important;
     }
+    .TestModal{
+        width: 40%;
+    }
 }
 @media(max-width:600px){
     .Service__wrapper{
         grid-template-columns: repeat(1,1fr) !important;
+    }
+    .LoginModal{
+        width: 80%;
     }
 }
 @media(max-width:600px){
     .HFAQ__wrapper{
         flex-direction: column;
         gap: 10px;
+    }
+    .myResult__grid{
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+    .MyResult__card{
+        text-align: center;
+    }
+    .warningModal{
+        width: 95%;
+        margin: 0 auto;
     }
 }
 @media(max-width:500px){
@@ -132,6 +159,12 @@
     }
     .Contact form{
         padding: 15px;
+    }
+    .LoginModal{
+        width: 90%;
+    }
+    .TestModal{
+        width: 50%;
     }
 }
 @media(max-width:470px){
@@ -157,6 +190,9 @@
     }
     .MuiPaper-root{
         padding: 0px !important;
+    }
+    .LoginModal input{
+        width: 100% !important;
     }
 }
 @media(max-width:426px) {
@@ -192,6 +228,9 @@
     .Result__Card{
         padding: 10px;
     }
+    .TestModal{
+        width: 60%;
+    }
 }
 @media(max-width:380px){
     .Hero h1{
@@ -223,5 +262,8 @@
     .Footer__wrapper{
         flex-direction: column;
         gap: 10px;
+    }
+    .TestModal{
+        width: 70%;
     }
 }

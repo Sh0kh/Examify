@@ -12,6 +12,7 @@ import Contact from './Pages/Contact';
 import FAQ from './Pages/FAQ';
 import Rating from './Pages/Rating';
 import Book1 from './Components/Books/Book1/Book1';
+import MyResult from './Pages/MyResult';
 function App() {
   return (
     <Provider store={store}>
@@ -24,10 +25,11 @@ function App() {
               <Route path='/test' element={<Test/>}/>
               <Route path='/faq' element={<FAQ/>}/>
               <Route path='/rating' element={<Rating/>}/>
+              <Route path='/myResult' element={<MyResult/>}/>
             </Route>
             <Route path='/contact' element={<Contact/>}/>
 
-            <Route path='/book1' element={<Book1/>}/>
+            <Route path='/book1/:ID' element={<Book1/>}/>
           </Route>
         </Routes>
       </Router>

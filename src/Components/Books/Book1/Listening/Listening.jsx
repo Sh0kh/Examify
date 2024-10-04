@@ -6,17 +6,33 @@ import Part3 from './Part3';
 import Part4 from './Part4';
 import { useDispatch } from 'react-redux';
 import { setComponent } from '../../../../Redux/ComponentSlice';
+import axios from '../../../../Service/axios';
+import { useParams } from 'react-router-dom';
 // import audioFile from './listening_audio_dce7445b-535f-4522-80bd-9eefb6bf9abc.mp3';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Listening() {
+    const { ID } = useParams()
     const [active, setActive] = useState(1);
+    const [answers, setAnswers] = useState(Array(40).fill('')); // Adjust size if needed
+
     const parts = [
-        { id: 1, component: <Part1 /> },
-        { id: 2, component: <Part2 /> },
-        { id: 3, component: <Part3 /> },
-        { id: 4, component: <Part4 /> },
+        { id: 1, component: <Part1 updateAnswers={(index, data) => updateAnswers(index, data, 0)} answers={answers.slice(0, 10)} /> },
+        { id: 2, component: <Part2 updateAnswers={(index, data) => updateAnswers(index, data, 10)} answers={answers.slice(10, 20)} /> },
+        { id: 3, component: <Part3 updateAnswers={(index, data) => updateAnswers(index, data, 20)} answers={answers.slice(20, 30)} /> },
+        { id: 4, component: <Part4 updateAnswers={(index, data) => updateAnswers(index, data, 30)} answers={answers.slice(30, 40)} /> },
     ];
     const dispatch = useDispatch();
+
+    const updateAnswers = (index, data, offset) => {
+        const adjustedIndex = index + offset; // Смещение для текущей части
+        const updatedAnswers = [...answers]; // Создаем копию массива
+        updatedAnswers[adjustedIndex] = data; // Обновляем нужный элемент
+        setAnswers(updatedAnswers); // Устанавливаем обновленный массив в состояние
+        console.log(`Ответы обновлены для вопроса ${adjustedIndex + 1}: ${data}`);
+        console.log('Текущее состояние ответов:', updatedAnswers); // Лог текущих ответов
+    };
     // const [audio] = useState(new Audio(audioFile));
 
     // useEffect(() => {
@@ -35,9 +51,67 @@ function Listening() {
 
 
     const handleNext = () => {
-        dispatch(setComponent('Reading'));
+        // dispatch(setComponent('Reading'));
+        SendUserAnswer();
         // audio.pause();
     };
+
+
+    const SendUserAnswer = async () =>{
+        try{
+            const userAnswersArray = answers.map(answer => {
+                return answer;
+            });
+    
+            const answer = {
+                examId:ID,
+                sectionType:'LISTENING',
+                userAnswer: userAnswersArray 
+            }
+            await axios.post('/ielts/exam/attempt/create/inline', answer,{
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`, 
+                  },
+            })
+            showSuccessToast()
+        }catch(error){
+            console.log(error);
+            showErrorToast(error.response?.data?.message || 'Xato!')
+        }
+    }
+
+    const showSuccessToast = () => {
+        toast.success('Muvaffaqiyatli!', {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            style: {
+                backgroundColor: '#1B2A3D',
+                color:'white'
+            }
+        });
+    };
+
+    const showErrorToast = (message) => {
+        toast.error(message, {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+               style: {
+                backgroundColor: '#1B2A3D',
+                color:'white'
+            }
+        });
+    };
+
 
     return (
         <div className='Listening'>
@@ -75,6 +149,7 @@ function Listening() {
                     {parts.find(part => part.id === active)?.component}
                 </div>
             </div>
+            <ToastContainer/>
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Top3() {
+function Top3({data}) {    
     return (
         <div className='Top3 pt-[150px] pb-[100px]'>
             <div className='Container'>
@@ -13,15 +13,15 @@ function Top3() {
                             </div>
                         </div>
                         <h2 className='text-[white] text-center mt-[10px] text-[20px]'>
-                            John Doe
+                            {data[2].user?.name}
                         </h2>
                         <div className='w-[70%] h-[2px] mx-auto my-[10px] bg-[white] rounded-[10px]'>
                         </div>
                         <span className='text-[white] block'>
-                            12.09.2024
+                            {data[2].createdAt.split('T')[0]}
                         </span>
                         <h2 className='text-MainColor py-[5px] px-[5px] bg-white w-[65px] mt-[10px] mx-auto text-[30px] rounded-[50%]'>
-                            6
+                            {data[2].overall}
                         </h2>
                     </div>
                     <div className='Top3__card1 text-center bg-MainColor px-[20px] cursor-pointer border-MainColor border-[2px] shadow-xl w-[400px] py-[60px] rounded-[8px]'>
@@ -32,15 +32,15 @@ function Top3() {
                             </div>
                         </div>
                         <h2 className='text-[white] text-center mt-[10px] text-[25px]'>
-                            John Doe
+                            {data[0]?.user?.name}
                         </h2>
                         <div className='w-[70%] h-[2px] mx-auto my-[10px] bg-[white] rounded-[10px]'>
                         </div>
                         <span className='text-[white] text-[20px] block'>
-                            12.09.2024
+                            {data[0]?.createdAt.split('T')[0]}
                         </span>
                         <h2 className='text-MainColor py-[5px] px-[5px] bg-white w-[65px] mt-[10px] mx-auto text-[30px] rounded-[50%]'>
-                            9
+                            {data[0].overall}
                         </h2>
                     </div>
                     <div className='Top3__card text-center bg-MainColor px-[20px] cursor-pointer border-MainColor border-[2px] shadow-xl w-[300px] py-[20px] rounded-[8px]'>
@@ -51,15 +51,15 @@ function Top3() {
                             </div>
                         </div>
                         <h2 className='text-[white] text-center mt-[10px] text-[20px]'>
-                            John Doe
+                            {data[1].user?.name}
                         </h2>
                         <div className='w-[70%] h-[2px] mx-auto my-[10px] bg-[white] rounded-[10px]'>
                         </div>
                         <span className='text-[white] block'>
-                            12.09.2024
+                            {data[1].createdAt.split('T')[0]}
                         </span>
                         <h2 className='text-MainColor py-[5px] px-[5px] bg-white w-[65px] mt-[10px] mx-auto text-[30px] rounded-[50%]'>
-                            7
+                            {data[1].overall}
                         </h2>
                     </div>
                 </div>
@@ -72,15 +72,15 @@ function Top3() {
                             </div>
                         </div>
                         <h2 className='text-[white] text-center mt-[10px] text-[25px]'>
-                            John Doe
+                            {data[0].user?.name}
                         </h2>
                         <div className='w-[70%] h-[2px] mx-auto my-[10px] bg-[white] rounded-[10px]'>
                         </div>
                         <span className='text-[white] text-[20px] block'>
-                            12.09.2024
+                            {data[0].createdAt.split('T')[0]}
                         </span>
                         <h2 className='text-MainColor py-[5px] px-[5px] bg-white w-[65px] mt-[10px] mx-auto text-[30px] rounded-[50%]'>
-                            9
+                            {data[0].overall}
                         </h2>
                     </div>
                     <div className='Top3__card text-center bg-MainColor px-[20px] cursor-pointer border-MainColor border-[2px] shadow-xl w-[300px] py-[20px] rounded-[8px]'>
@@ -91,15 +91,15 @@ function Top3() {
                             </div>
                         </div>
                         <h2 className='text-[white] text-center mt-[10px] text-[20px]'>
-                            John Doe
+                            {data[1].user?.name}
                         </h2>
                         <div className='w-[70%] h-[2px] mx-auto my-[10px] bg-[white] rounded-[10px]'>
                         </div>
                         <span className='text-[white] block'>
-                            12.09.2024
+                            {data[1].createdAt.split('T')[0]}
                         </span>
                         <h2 className='text-MainColor py-[5px] px-[5px] bg-white w-[65px] mt-[10px] mx-auto text-[30px] rounded-[50%]'>
-                            7
+                            {data[1].overall}
                         </h2>
                     </div>
                     <div className='Top3__card text-center bg-MainColor px-[20px] cursor-pointer border-MainColor border-[2px] shadow-xl w-[300px] py-[20px] rounded-[8px]'>
@@ -110,19 +110,17 @@ function Top3() {
                             </div>
                         </div>
                         <h2 className='text-[white] text-center mt-[10px] text-[20px]'>
-                            John Doe
+                            {data[2].user?.name}
                         </h2>
                         <div className='w-[70%] h-[2px] mx-auto my-[10px] bg-[white] rounded-[10px]'>
                         </div>
                         <span className='text-[white] block'>
-                            12.09.2024
+                            {data[2].createdAt.split('T')[0]}
                         </span>
                         <h2 className='text-MainColor py-[5px] px-[5px] bg-white w-[65px] mt-[10px] mx-auto text-[30px] rounded-[50%]'>
-                            6
+                            {data[2].overall}
                         </h2>
                     </div>
-
-
                 </div>
             </div>
         </div>
