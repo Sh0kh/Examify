@@ -73,7 +73,7 @@ function Listening() {
                   },
             })
             showSuccessToast()
-            dispatch(setComponent('Reading'));
+            dispatch(setComponent('READING'));
         }catch(error){
             console.log(error);
             showErrorToast(error.response?.data?.message || 'Xato!')

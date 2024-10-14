@@ -52,7 +52,7 @@ function Reading() {
                 },
             })
             showSuccessToast()
-            dispatch(setComponent('Speaking'))
+            dispatch(setComponent('SPEAKING'))
         } catch (error) {
             console.log(error);
             showErrorToast(error.response?.data?.message || 'Error!')

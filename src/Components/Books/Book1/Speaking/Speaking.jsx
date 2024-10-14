@@ -10,7 +10,7 @@ function Speaking() {
 const dispatch = useDispatch()
 
 const handlNext = ()=>{
-    dispatch(setComponent('Writing'))
+    dispatch(setComponent('WRITING'))
 }
     return (
         <div className='Speaking'>

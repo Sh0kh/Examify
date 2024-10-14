@@ -111,14 +111,13 @@ function Speaking1() {
         audioContextRef.current = null;
         setVolume(0); // Reset volume
     };
-
     const sendAudioToBackend = async (audioBlob) => {
         const formData = new FormData();
         formData.append('voiceAnswer', audioBlob, 'recording.wav');
 
         try {
             await axios.post(
-                `http://158.220.111.34:8080/api/ielts/exam/attempt/create/outline-speaking`,
+                `/ielts/exam/attempt/create/outline-speaking/${ID}`,
                 formData,
                 {
                     headers: {
@@ -126,7 +125,6 @@ function Speaking1() {
                         'Content-Type': 'multipart/form-data',
                     },
                     params: {
-                        examId: ID,
                         question: 'What did you study in history lessons when you were at school?',
                         partNumber: 1,
                     },
