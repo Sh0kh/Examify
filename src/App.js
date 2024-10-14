@@ -28,7 +28,6 @@ function App() {
               <Route path='/myResult' element={<MyResult/>}/>
             </Route>
             <Route path='/contact' element={<Contact/>}/>
-
             <Route path='/book1/:ID' element={<Book1/>}/>
           </Route>
         </Routes>

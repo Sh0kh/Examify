@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Part1() {
+function Part1({ updateAnswers, answers }) {
     return (
         <div className='overflow-hidden flex gap-[20px] border-t-[2px] pt-[10px]'>
             <div className='overflow-y-scroll h-[550px]  w-[50%] px-[15px] pb-[50px]'>
@@ -68,17 +68,17 @@ function Part1() {
                 </p>
                 <ol className='list-decimal pl-10 mt-[10px]'>
                     <li>
-                        E-books and e-readers are presenting a versatile substitute for traditional books. <strong>1.</strong> <input type="text" className="border border-gray-300 px-2 py-1 ml-1" />
+                        E-books and e-readers are presenting a versatile substitute for traditional books. <strong>1.</strong> <input value={answers[0]} onChange={(e) => updateAnswers(0, e.target.value)} type="text" className="border border-gray-300 px-2 py-1 ml-1" />
                     </li>
                     <li>
-                        Digital records and online banking provide improved accessibility and protection.<strong>2.</strong> <input type="text" className="border border-gray-300 px-2 py-1 ml-1" />
+                        Digital records and online banking provide improved accessibility and protection.<strong>2.</strong> <input value={answers[1]} onChange={(e) => updateAnswers(1, e.target.value)} type="text" className="border border-gray-300 px-2 py-1 ml-1" />
                     </li>
                     <li>
-                        Developments in virtual and augmented reality have transformed the way digital content is experienced.<strong>3.</strong> <input type="text" className="border border-gray-300 px-2 py-1 ml-1" />
+                        Developments in virtual and augmented reality have transformed the way digital content is experienced.<strong>3.</strong> <input value={answers[2]} onChange={(e) => updateAnswers(2, e.target.value)} type="text" className="border border-gray-300 px-2 py-1 ml-1" />
                     </li>
                     <li>
                         Innovations offer potential for a more interconnected and eco-friendly tomorrow.
-                        <strong>4.</strong> <input type="text" className="border border-gray-300 px-2 py-1 ml-1" />
+                        <strong>4.</strong> <input value={answers[3]} onChange={(e) => updateAnswers(3, e.target.value)} type="text" className="border border-gray-300 px-2 py-1 ml-1" />
                     </li>
                 </ol>
                 <strong className='my-[20px] block text-[22px]'>
@@ -98,100 +98,121 @@ function Part1() {
                 </strong>
                 <p>
 
-                    Innovations in technology have altered how we access and engage with <strong>5.</strong><input type="text" className="border border-gray-300 px-2 py-1 ml-1" />
-                    , shifting away from traditional paper-based methods to <strong>6.</strong><input type="text" className="border border-gray-300 px-2 py-1 ml-1" />
-                    , which offers convenient access to a range of data, while high-speed internet enables <strong>7.</strong><input type="text" className="border border-gray-300 px-2 py-1 ml-1" />
-                    information exchange. Electronic books, or e-books, provide instant access to a wide range of titles without the need for <strong>8.</strong><input type="text" className="border border-gray-300 px-2 py-1 ml-1" />
-                    , offering enhanced features and gaining popularity through dedicated e-reader devices. The digital shift has transformed both education and business. Institutions employ e-learning platforms and digital textbooks for <strong>9.</strong><input type="text" className="border border-gray-300 px-2 py-1 ml-1" />
+                    Innovations in technology have altered how we access and engage with <strong>5.</strong><input value={answers[4]} onChange={(e) => updateAnswers(4, e.target.value)} type="text" className="border border-gray-300 px-2 py-1 ml-1" />
+                    , shifting away from traditional paper-based methods to <strong>6.</strong><input value={answers[5]} onChange={(e) => updateAnswers(5, e.target.value)} type="text" className="border border-gray-300 px-2 py-1 ml-1" />
+                    , which offers convenient access to a range of data, while high-speed internet enables <strong>7.</strong><input value={answers[6]} onChange={(e) => updateAnswers(6, e.target.value)} type="text" className="border border-gray-300 px-2 py-1 ml-1" />
+                    information exchange. Electronic books, or e-books, provide instant access to a wide range of titles without the need for <strong>8.</strong><input value={answers[7]} onChange={(e) => updateAnswers(7, e.target.value)} type="text" className="border border-gray-300 px-2 py-1 ml-1" />
+                    , offering enhanced features and gaining popularity through dedicated e-reader devices. The digital shift has transformed both education and business. Institutions employ e-learning platforms and digital textbooks for <strong>9.</strong><input value={answers[8]} onChange={(e) => updateAnswers(8, e.target.value)} type="text" className="border border-gray-300 px-2 py-1 ml-1" />
                     , while businesses embrace digital documentation and cloud storage for efficiency and collaboration.
 
 
 
                 </p>
                 <strong className='my-[20px] block text-[22px]'>
-                Questions 10-13
+                    Questions 10-13
                 </strong>
                 <p className='my-[15px]'>
-                Do the following statements agree with the information given in Reading Passage?
+                    Do the following statements agree with the information given in Reading Passage?
                 </p>
                 <p className='my-[15px]'>
-                In boxes 10-13 on your answer sheet, write
+                    In boxes 10-13 on your answer sheet, write
                 </p>
                 <p className='my-[15px]'>
-                <strong>TRUE</strong> - if the statement agrees with the information
+                    <strong>TRUE</strong> - if the statement agrees with the information
                 </p>
                 <p className='my-[15px]'>
-                <strong>FALSE</strong>  - if the statement contradicts the information
+                    <strong>FALSE</strong>  - if the statement contradicts the information
                 </p>
                 <p className='my-[15px]'>
-                <strong>NOT GIVEN </strong>- if there is no information on this
+                    <strong>NOT GIVEN </strong>- if there is no information on this
                 </p>
 
                 <p className='mb-[15px]'>
-                <strong> 10. </strong> Newly emerging technologies are expected to have a profound effect on digital advancement beyond traditional paper-based systems.
+                    <strong> 10. </strong> Newly emerging technologies are expected to have a profound effect on digital advancement beyond traditional paper-based systems.
                 </p>
                 <ul>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="1" id="1" />
+                        <input
+                            value='TRUE'
+                            onChange={(e) => updateAnswers(9, e.target.value)}
+                            type="radio"
+                            name="1"
+                            id="1"
+                            checked={answers[9] === 'TRUE'}
+                        />
                         TRUE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="1" id="1" />
+                        <input
+                            value='FALSE'
+                            onChange={(e) => updateAnswers(9, e.target.value)}
+                            type="radio"
+                            name="1"
+                            id="1"
+                            checked={answers[9] === 'FALSE'}
+                        />
                         FALSE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="1" id="1" />
+                        <input
+                            value='NOTGIVEN'
+                            onChange={(e) => updateAnswers(9, e.target.value)}
+                            type="radio"
+                            name="1"
+                            id="1"
+                            checked={answers[9] === 'NOTGIVEN'}
+                        />
                         NOT GIVEN
                     </li>
                 </ul>
                 <p className='my-[15px]'>
-                <strong>11. </strong> Digital options pose negative implications for the environment.
+                    <strong>11. </strong> Digital options pose negative implications for the environment.
                 </p>
                 <ul>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="2" id="2" />
+                        <input value="TRUE" onChange={(e)=> updateAnswers(10, e.target.value)} checked={answers[10] === 'TRUE'} type="radio" name="2" id="2" />
                         TRUE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="2" id="2" />
+                        <input value='FALSE' onChange={(e)=> updateAnswers(10, e.target.value)} checked={answers[10] === 'FALSE'} type="radio" name="2" id="2" />
                         FALSE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="2" id="2" />
+                        <input value="NOTGIVEN" onChange={(e)=> updateAnswers(10, e.target.value)} checked={answers[10] === 'NOTGIVEN'} type="radio" name="2" id="2" />
                         NOT GIVEN
                     </li>
                 </ul>
                 <p className='my-[15px]'>
-                <strong> 12. </strong> Efforts aimed at enhancing digital literacy have the potential to revive paper-based content in the near future.
+                    <strong> 12. </strong> Efforts aimed at enhancing digital literacy have the potential to revive paper-based content in the near future.
                 </p>
                 <ul>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="3" id="3" />
+                        <input value="TRUE" onChange={(e)=> updateAnswers(11, e.target.value)} checked={answers[11] === 'TRUE'} type="radio" name="3" id="3" />
                         TRUE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="3" id="3" />
+                        <input value='FALSE' onChange={(e)=> updateAnswers(11, e.target.value)} checked={answers[11] === 'FALSE'} type="radio" name="3" id="3" />
                         FALSE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="3" id="3" />
+                        <input value="NOTGIVEN" onChange={(e)=> updateAnswers(11, e.target.value)} checked={answers[11] === 'NOTGIVEN'} type="radio" name="3" id="3" />
                         NOT GIVEN
                     </li>
                 </ul>
                 <p className='my-[15px]'>
-                <strong> 13. </strong> Information technology has helped overcome the limitations of traditional paper-based systems.
+                    <strong> 13. </strong> Information technology has helped overcome the limitations of traditional paper-based systems.
                 </p>
                 <ul>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="4" id="4" />
+                        <input value="TRUE" onChange={(e)=> updateAnswers(12, e.target.value)} checked={answers[12] === 'TRUE'} type="radio" name="4" id="4" />
                         TRUE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="4" id="4" />
+                        <input value='FALSE' onChange={(e)=> updateAnswers(12, e.target.value)} checked={answers[12] === 'FALSE'} type="radio" name="4" id="4" />
                         FALSE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="4" id="4" />
+                        <input value="NOTGIVEN" onChange={(e)=> updateAnswers(12, e.target.value)} checked={answers[12] === 'NOTGIVEN'} type="radio" name="4" id="4" />
                         NOT GIVEN
                     </li>
                 </ul>

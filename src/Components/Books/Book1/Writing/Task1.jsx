@@ -1,6 +1,6 @@
 import React from 'react'
 import Foto from './img/photo_2024-09-30_17-06-56.jpg'
-function Task1() {
+function Task1({setAnswer, answer}) {
   return (
     <div className='Task1 px-[20px] flex gap-[20px]'>
         <div className='p-[20px] border-[2px] border-black w-[50%]'>
@@ -15,7 +15,10 @@ function Task1() {
             </p>
             <img className='w-[600px] block mx-auto' src={Foto} alt="foto" />
         </div>
-        <textarea className='p-[20px] border-[2px] border-black w-[50%] resize-none' placeholder='Write your task 1 response. here....'></textarea>
+        <textarea 
+        value={answer}
+        onChange={(e)=> setAnswer(e.target.value)}
+        className='p-[20px] border-[2px] border-black w-[50%] resize-none' placeholder='Write your task 1 response. here....'></textarea>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Task2() {
+function Task2({setAnswer, answer}) {
   return (
     <div className='Task2 px-[20px]  mt-[20px]'>
          <div className='p-[20px] border-[2px] border-black w-[100%]'>
@@ -14,7 +14,10 @@ function Task2() {
             You should spend about 20 minutes on this task. Write at least 150 words.
             </p>
         </div>
-        <textarea className='p-[20px] border-[2px] border-black w-[100%] mt-[20px] resize-none h-[600px]' placeholder='Write your task 1 response. here....'></textarea>
+        <textarea
+        value={answer}
+        onChange={(e)=>setAnswer( e.target.value)}
+        className='p-[20px] border-[2px] border-black w-[100%] mt-[20px] resize-none h-[600px]' placeholder='Write your task 1 response. here....'></textarea>
     </div>
   )
 }

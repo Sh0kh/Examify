@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Part2() {
+function Part2({ updateAnswers, answers }) {
     return (
         <div className='overflow-hidden flex gap-[20px] border-t-[2px] pt-[10px]'>
             <div className='overflow-y-scroll h-[550px]  w-[50%] px-[15px] pb-[50px]'>
@@ -91,7 +91,10 @@ function Part2() {
                 </ul>
                 <p className='my-[15px]'>
                     <strong>14.</strong> Paragraph A
-                    <select name="" id="" className='border-[2px] rounded-[5px] ml-[5px]'>
+                    <select
+                        value={answers[0]}
+                        onChange={(e) => updateAnswers(0, e.target.value)}
+                        name="" id="" className='border-[2px] rounded-[5px] ml-[5px]'>
                         <option defaultValue>Select</option>
                         <option value="i">i</option>
                         <option value="ii">ii</option>
@@ -105,7 +108,10 @@ function Part2() {
                 </p>
                 <p className='my-[15px]'>
                     <strong>15.</strong> Paragraph B
-                    <select name="" id="" className='border-[2px] rounded-[5px] ml-[5px]'>
+                    <select
+                        value={answers[1]}
+                        onChange={(e) => updateAnswers(1, e.target.value)}
+                        name="" id="" className='border-[2px] rounded-[5px] ml-[5px]'>
                         <option defaultValue>Select</option>
                         <option value="i">i</option>
                         <option value="ii">ii</option>
@@ -119,7 +125,10 @@ function Part2() {
                 </p>
                 <p className='my-[15px]'>
                     <strong>16.</strong> Paragraph C
-                    <select name="" id="" className='border-[2px] rounded-[5px] ml-[5px]'>
+                    <select
+                        value={answers[2]}
+                        onChange={(e) => updateAnswers(2, e.target.value)}
+                        name="" id="" className='border-[2px] rounded-[5px] ml-[5px]'>
                         <option defaultValue>Select</option>
                         <option value="i">i</option>
                         <option value="ii">ii</option>
@@ -133,7 +142,10 @@ function Part2() {
                 </p>
                 <p className='my-[15px]'>
                     <strong>17.</strong> Paragraph D
-                    <select name="" id="" className='border-[2px] rounded-[5px] ml-[5px]'>
+                    <select
+                        value={answers[3]}
+                        onChange={(e) => updateAnswers(3, e.target.value)}
+                        name="" id="" className='border-[2px] rounded-[5px] ml-[5px]'>
                         <option defaultValue>Select</option>
                         <option value="i">i</option>
                         <option value="ii">ii</option>
@@ -147,7 +159,10 @@ function Part2() {
                 </p>
                 <p className='my-[15px]'>
                     <strong>18.</strong> Paragraph E
-                    <select name="" id="" className='border-[2px] rounded-[5px] ml-[5px]'>
+                    <select
+                        value={answers[4]}
+                        onChange={(e) => updateAnswers(4, e.target.value)}
+                        name="" id="" className='border-[2px] rounded-[5px] ml-[5px]'>
                         <option defaultValue>Select</option>
                         <option value="i">i</option>
                         <option value="ii">ii</option>
@@ -161,7 +176,10 @@ function Part2() {
                 </p>
                 <p className='my-[15px]'>
                     <strong>19.</strong> Paragraph F
-                    <select name="" id="" className='border-[2px] rounded-[5px] ml-[5px]'>
+                    <select
+                        value={answers[5]}
+                        onChange={(e) => updateAnswers(5, e.target.value)}
+                        name="" id="" className='border-[2px] rounded-[5px] ml-[5px]'>
                         <option defaultValue>Select</option>
                         <option value="i">i</option>
                         <option value="ii">ii</option>
@@ -175,7 +193,10 @@ function Part2() {
                 </p>
                 <p className='my-[15px]'>
                     <strong>20.</strong> Paragraph G
-                    <select name="" id="" className='border-[2px] rounded-[5px] ml-[5px]'>
+                    <select
+                        value={answers[6]}
+                        onChange={(e) => updateAnswers(6, e.target.value)}
+                        name="" id="" className='border-[2px] rounded-[5px] ml-[5px]'>
                         <option defaultValue>Select</option>
                         <option value="i">i</option>
                         <option value="ii">ii</option>
@@ -199,19 +220,19 @@ function Part2() {
                 </p>
                 <ul>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="1" id="1" />
+                        <input value={`A`} onChange={(e) => updateAnswers(7, e.target.value)} type="radio" name="1" id="1" />
                         A) Introduction of metallic coins
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="1" id="1" />
+                        <input value={'B'} onChange={(e) => updateAnswers(7, e.target.value)} type="radio" name="1" id="1" />
                         B) Adoption of paper money
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="1" id="1" />
+                        <input value={'C'} onChange={(e) => updateAnswers(7, e.target.value)} type="radio" name="1" id="1" />
                         C) Emergence of digital payment methods
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="1" id="1" />
+                        <input value={'D'} onChange={(e) => updateAnswers(7, e.target.value)} type="radio" name="1" id="1" />
                         D) Establishment of modern banking systems and monetary policies
                     </li>
                 </ul>
@@ -220,21 +241,21 @@ function Part2() {
                 </p>
                 <ul>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="2" id="2" />
+                        <input value={`A`} onChange={(e) => updateAnswers(8, e.target.value)} type="radio" name="2" id="2" />
                         A) It is becoming outdated due to digital transactions.
 
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="2" id="2" />
+                        <input value={"B"} onChange={(e) => updateAnswers(8, e.target.value)} type="radio" name="2" id="2" />
                         B) It is primarily utilized by affluent individuals.
 
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="2" id="2" />
+                        <input value={"C"} onChange={(e) => updateAnswers(8, e.target.value)} type="radio" name="2" id="2" />
                         C) It is crucial for financial inclusion and stability.
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="2" id="2" />
+                        <input value={"D"} onChange={(e) => updateAnswers(8, e.target.value)} type="radio" name="2" id="2" />
                         D) It is restricted to regions with limited banking access.
                     </li>
                 </ul>
@@ -243,21 +264,21 @@ function Part2() {
                 </p>
                 <ul>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="3" id="3" />
+                        <input value={"A"} onChange={(e) => updateAnswers(9, e.target.value)} type="radio" name="3" id="3" />
                         A) Its susceptibility to changes in the financial landscape
 
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="3" id="3" />
+                        <input value={"B"} onChange={(e) => updateAnswers(9, e.target.value)} type="radio" name="3" id="3" />
                         B) Its neglect of marginalized sectors of society
 
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="3" id="3" />
+                        <input value={"C"} onChange={(e) => updateAnswers(9, e.target.value)} type="radio" name="3" id="3" />
                         C) Its dependence on digital financial tools
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="3" id="3" />
+                        <input value={"D"} onChange={(e) => updateAnswers(9, e.target.value)} type="radio" name="3" id="3" />
                         D) Its contribution to economic empowerment and fairness
                     </li>
                 </ul>
@@ -265,68 +286,95 @@ function Part2() {
                     Questions 24-26
                 </strong>
                 <p className='my-[15px]'>
-                Do the following statements agree with the information given in Reading Passage?
+                    Do the following statements agree with the information given in Reading Passage?
                 </p>
                 <p className='my-[15px]'>
-                In boxes 24-26 on your answer sheet, write
+                    In boxes 24-26 on your answer sheet, write
                 </p>
                 <p className='my-[15px]'>
-                <strong>TRUE</strong> - if the statement agrees with the information
+                    <strong>TRUE</strong> - if the statement agrees with the information
                 </p>
                 <p className='my-[15px]'>
-                <strong>FALSE</strong>  - if the statement contradicts the information
+                    <strong>FALSE</strong>  - if the statement contradicts the information
                 </p>
                 <p className='my-[15px]'>
-                <strong>NOT GIVEN </strong>- if there is no information on this
+                    <strong>NOT GIVEN </strong>- if there is no information on this
                 </p>
                 <p className='my-[15px]'>
-                <strong>24. </strong> Cash is mainly used for its function as a medium of exchange in modern society.
+                    <strong>24. </strong> Cash is mainly used for its function as a medium of exchange in modern society.
                 </p>
                 <ul>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="2" id="2" />
+                        <input
+                            value="TRUE"
+                            onChange={(e) => updateAnswers(10, e.target.value)}
+                            type="radio" name="2" id="2" />
                         TRUE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="2" id="2" />
+                        <input
+                            value="FALSE"
+                            onChange={(e) => updateAnswers(10, e.target.value)}
+                            type="radio" name="2" id="2" />
                         FALSE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="2" id="2" />
+                        <input
+                            value="NOTGIVEN"
+                            onChange={(e) => updateAnswers(10, e.target.value)}
+                            type="radio" name="2" id="2" />
                         NOT GIVEN
                     </li>
                 </ul>
                 <p className='mb-[15px]'>
-                <strong> 25.  </strong> The design and imagery on banknotes have little influence on citizens' sense of pride.
+                    <strong> 25.  </strong> The design and imagery on banknotes have little influence on citizens' sense of pride.
                 </p>
                 <ul>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="1" id="1" />
+                        <input
+                            value="TRUE"
+                            onChange={(e) => updateAnswers(11, e.target.value)}
+                            type="radio" name="1" id="1" />
                         TRUE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="1" id="1" />
+                        <input
+                            value="FALSE"
+                            onChange={(e) => updateAnswers(11, e.target.value)}
+                            type="radio" name="1" id="1" />
                         FALSE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="1" id="1" />
+                        <input
+                            value="NOTGIVEN"
+                            onChange={(e) => updateAnswers(11, e.target.value)}
+                            type="radio" name="1" id="1" />
                         NOT GIVEN
                     </li>
                 </ul>
                 <p className='my-[15px]'>
-                <strong> 26. </strong> Cash is becoming obsolete in the global economy due to digital advancements.
+                    <strong> 26. </strong> Cash is becoming obsolete in the global economy due to digital advancements.
                 </p>
                 <ul>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="3" id="3" />
+                        <input
+                            value="TRUE"
+                            onChange={(e) => updateAnswers(12, e.target.value)}
+                            type="radio" name="3" id="3" />
                         TRUE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="3" id="3" />
+                        <input
+                            value="FALSE"
+                            onChange={(e) => updateAnswers(12, e.target.value)}
+                            type="radio" name="3" id="3" />
                         FALSE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="3" id="3" />
+                        <input
+                            value="NOTGIVEN"
+                            onChange={(e) => updateAnswers(12, e.target.value)}
+                            type="radio" name="3" id="3" />
                         NOT GIVEN
                     </li>
                 </ul>

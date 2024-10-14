@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Part3() {
+function Part3({ updateAnswers, answers }) {
     return (
         <div className='overflow-hidden flex gap-[20px] border-t-[2px] pt-[10px]'>
             <div className='overflow-y-scroll h-[550px]  w-[50%] px-[15px] pb-[50px]'>
@@ -80,7 +80,10 @@ function Part3() {
                         27.
                     </strong>
                     Description of a regulatory body working on guidelines for mining operations.
-                    <select name="" id="">
+                    <select
+                        value={answers[0]}
+                        onChange={(e) => updateAnswers(0, e.target.value)}
+                        className='border-[1px] border-[black] rounded-[5px]' name="" id="">
                         <option value="A">A</option>
                         <option value="B">B</option>
                         <option value="C">C</option>
@@ -99,7 +102,10 @@ function Part3() {
                         28.
                     </strong>
                     The potential benefits of mining-related scientific exploration.
-                    <select name="" id="">
+                    <select
+                        value={answers[1]}
+                        onChange={(e) => updateAnswers(1, e.target.value)}
+                        className='border-[1px] border-[black] rounded-[5px]' name="" id="">
                         <option value="A">A</option>
                         <option value="B">B</option>
                         <option value="C">C</option>
@@ -118,7 +124,10 @@ function Part3() {
                         29.
                     </strong>
                     Concerns regarding the precision of mining operations and their impact.
-                    <select name="" id="">
+                    <select
+                        value={answers[2]}
+                        onChange={(e) => updateAnswers(2, e.target.value)}
+                        className='border-[1px] border-[black] rounded-[5px]' name="" id="">
                         <option value="A">A</option>
                         <option value="B">B</option>
                         <option value="C">C</option>
@@ -137,7 +146,10 @@ function Part3() {
                         30.
                     </strong>
                     Reference to investments in reducing environmental impacts of mining.
-                    <select name="" id="">
+                    <select
+                        value={answers[3]}
+                        onChange={(e) => updateAnswers(3, e.target.value)}
+                        className='border-[1px] border-[black] rounded-[5px]' name="" id="">
                         <option value="A">A</option>
                         <option value="B">B</option>
                         <option value="C">C</option>
@@ -156,7 +168,10 @@ function Part3() {
                         31.
                     </strong>
                     Comparison of environmental impacts between deep-sea and land mining.
-                    <select name="" id="">
+                    <select
+                        value={answers[4]}
+                        onChange={(e) => updateAnswers(4, e.target.value)}
+                        className='border-[1px] border-[black] rounded-[5px]' name="" id="">
                         <option value="A">A</option>
                         <option value="B">B</option>
                         <option value="C">C</option>
@@ -190,15 +205,24 @@ function Part3() {
                 </p>
                 <ul>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="2" id="2" />
+                        <input
+                            value="TRUE"
+                            onChange={(e) => updateAnswers(5, e.target.value)}
+                            type="radio" name="2" id="2" />
                         TRUE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="2" id="2" />
+                        <input
+                            value="FALSE"
+                            onChange={(e) => updateAnswers(5, e.target.value)}
+                            type="radio" name="2" id="2" />
                         FALSE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="2" id="2" />
+                        <input
+                            value="NOTGIVEN"
+                            onChange={(e) => updateAnswers(5, e.target.value)}
+                            type="radio" name="2" id="2" />
                         NOT GIVEN
                     </li>
                 </ul>
@@ -207,15 +231,24 @@ function Part3() {
                 </p>
                 <ul>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="1" id="1" />
+                        <input
+                            value="TRUE"
+                            onChange={(e) => updateAnswers(6, e.target.value)}
+                            type="radio" name="1" id="1" />
                         TRUE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="1" id="1" />
+                        <input
+                            value="FALSE"
+                            onChange={(e) => updateAnswers(6, e.target.value)}
+                            type="radio" name="1" id="1" />
                         FALSE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="1" id="1" />
+                        <input
+                            value="NOTGIVEN"
+                            onChange={(e) => updateAnswers(6, e.target.value)}
+                            type="radio" name="1" id="1" />
                         NOT GIVEN
                     </li>
                 </ul>
@@ -224,15 +257,24 @@ function Part3() {
                 </p>
                 <ul>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="3" id="3" />
+                        <input
+                            value="TRUE"
+                            onChange={(e) => updateAnswers(7, e.target.value)}
+                            type="radio" name="3" id="3" />
                         TRUE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="3" id="3" />
+                        <input
+                            value="FALSE"
+                            onChange={(e) => updateAnswers(7, e.target.value)}
+                            type="radio" name="3" id="3" />
                         FALSE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="3" id="3" />
+                        <input
+                            value="NOTGIVEN"
+                            onChange={(e) => updateAnswers(7, e.target.value)}
+                            type="radio" name="3" id="3" />
                         NOT GIVEN
                     </li>
                 </ul>
@@ -241,15 +283,24 @@ function Part3() {
                 </p>
                 <ul>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="5" id="5" />
+                        <input
+                            value="TRUE"
+                            onChange={(e) => updateAnswers(8, e.target.value)}
+                            type="radio" name="5" id="5" />
                         TRUE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="5" id="5" />
+                        <input
+                            value="FALSE"
+                            onChange={(e) => updateAnswers(8, e.target.value)}
+                            type="radio" name="5" id="5" />
                         FALSE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="5" id="5" />
+                        <input
+                            value="NOTGIVEN"
+                            onChange={(e) => updateAnswers(8, e.target.value)}
+                            type="radio" name="5" id="5" />
                         NOT GIVEN
                     </li>
                 </ul>
@@ -258,15 +309,24 @@ function Part3() {
                 </p>
                 <ul>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="6" id="6" />
+                        <input
+                            value="TRUE"
+                            onChange={(e) => updateAnswers(9, e.target.value)}
+                            type="radio" name="6" id="6" />
                         TRUE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="6" id="6" />
+                        <input
+                            value="FALSE"
+                            onChange={(e) => updateAnswers(9, e.target.value)}
+                            type="radio" name="6" id="6" />
                         FALSE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="6" id="6" />
+                        <input
+                            value="NOTGIVEN"
+                            onChange={(e) => updateAnswers(9, e.target.value)}
+                            type="radio" name="6" id="6" />
                         NOT GIVEN
                     </li>
                 </ul>
@@ -275,15 +335,24 @@ function Part3() {
                 </p>
                 <ul>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="7" id="7" />
+                        <input
+                            value="TRUE"
+                            onChange={(e) => updateAnswers(10, e.target.value)}
+                            type="radio" name="7" id="7" />
                         TRUE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="7" id="7" />
+                        <input
+                            value="FALSE"
+                            onChange={(e) => updateAnswers(10, e.target.value)}
+                            type="radio" name="7" id="7" />
                         FALSE
                     </li>
                     <li className='flex items-center gap-[5px]'>
-                        <input type="radio" name="7" id="7" />
+                        <input
+                            value="NOTGIVEN"
+                            onChange={(e) => updateAnswers(10, e.target.value)}
+                            type="radio" name="7" id="7" />
                         NOT GIVEN
                     </li>
                 </ul>
@@ -298,21 +367,24 @@ function Part3() {
                         38.
                     </strong>
                     Deep-sea mining targets, among others,
-                    <input type="text" className="border border-gray-300 px-2 py-1 ml-1" />
+                    <input
+                    value={answers[11]}
+                    onChange={(e)=>updateAnswers(11, e.target.value)}
+                    type="text" className="border border-gray-300 px-2 py-1 ml-1" />
                     rich in essential metals for technology.
                 </p>
                 <p className='my-[15px]'>
                     <strong>
                         39.
                     </strong>
-                    Environmental groups advocate for a <input type="text" className="border border-gray-300 px-2 py-1 ml-1" />
+                    Environmental groups advocate for a <input value={answers[12]} onChange={(e)=>updateAnswers(12, e.target.value)} type="text" className="border border-gray-300 px-2 py-1 ml-1" />
                     on mining activities to prevent potential damage.
                 </p>
                 <p className='my-[15px]'>
                     <strong>
                         40.
                     </strong>
-                    The <input type="text" className="border border-gray-300 px-2 py-1 ml-1" />
+                    The <input value={answers[13]} onChange={(e)=>updateAnswers(13, e.target.value)} type="text" className="border border-gray-300 px-2 py-1 ml-1" />
                     oversees the regulation of seabed exploitation in areas outside of national boundaries.
                 </p>
             </div>

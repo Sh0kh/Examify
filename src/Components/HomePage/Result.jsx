@@ -54,7 +54,7 @@ function Result() {
                       {index + 1}
                     </span>
                   )}
-                  <span className='text-[20px]'>{i?.user.name}</span>
+                  <span className='text-[20px] w-[50px]'>{i?.user.name}</span>
                 </div>
                 <span>
                   {i.overall}

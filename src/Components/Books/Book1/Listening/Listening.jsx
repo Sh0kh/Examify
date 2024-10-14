@@ -51,7 +51,6 @@ function Listening() {
 
 
     const handleNext = () => {
-        // dispatch(setComponent('Reading'));
         SendUserAnswer();
         // audio.pause();
     };
@@ -74,6 +73,7 @@ function Listening() {
                   },
             })
             showSuccessToast()
+            dispatch(setComponent('Reading'));
         }catch(error){
             console.log(error);
             showErrorToast(error.response?.data?.message || 'Xato!')

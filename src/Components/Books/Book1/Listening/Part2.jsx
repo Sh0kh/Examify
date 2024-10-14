@@ -3,7 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 function Part2({ updateAnswers }) {
   const [selected1, setSelected1] = useState([]); // For the first question
   const [selected2, setSelected2] = useState([]); // For the second question
-  const [selectedOptions, setSelectedOptions] = useState({}); // To hold selected values for select inputs
+  const [selectedOptions, setSelectedOptions] = useState(Array(5).fill('')); // For questions 15-19
+  const previousSelectedOptionsRef = useRef([]); // Ref to track previous selectedOptions state
   const previousConcatenatedRef1 = useRef('');
   const previousConcatenatedRef2 = useRef('');
 
@@ -23,37 +24,25 @@ function Part2({ updateAnswers }) {
     { label: "E. There are unlimited opportunities for growth", value: "E" },
   ];
 
-  const handleCheckboxChange1 = (e) => {
+  const handleCheckboxChange = (e, selected, setSelected, questionIndexStart) => {
     const { value, checked } = e.target;
     if (checked) {
-      if (selected1.length < 2) {
-        setSelected1([...selected1, value]);
+      if (selected.length < 2) {
+        setSelected((prev) => {
+          const newSelected = [...prev, value];
+          const updateIndex = prev.length; 
+          updateAnswers(questionIndexStart + updateIndex, value); 
+          return newSelected;
+        });
       }
     } else {
-      setSelected1(selected1.filter((item) => item !== value));
+      setSelected((prev) => {
+        const newSelected = prev.filter((item) => item !== value);
+        const updateIndex = prev.indexOf(value);
+        updateAnswers(questionIndexStart + updateIndex, '');
+        return newSelected;
+      });
     }
-  };
-
-  const handleCheckboxChange2 = (e) => {
-    const { value, checked } = e.target;
-    if (checked) {
-      if (selected2.length < 2) {
-        setSelected2([...selected2, value]);
-      }
-    } else {
-      setSelected2(selected2.filter((item) => item !== value));
-    }
-  };
-
-  const handleSelectChange = (questionIndex, value) => {
-    // Update the selected options in state
-    setSelectedOptions((prev) => ({
-      ...prev,
-      [questionIndex]: value,
-    }));
-
-    // Call updateAnswers with the correct index (15-19)
-    updateAnswers(questionIndex, value);
   };
 
   useEffect(() => {
@@ -61,20 +50,50 @@ function Part2({ updateAnswers }) {
       const concatenated = selected1.join('');
       if (concatenated !== previousConcatenatedRef1.current) {
         previousConcatenatedRef1.current = concatenated;
-        updateAnswers(0, concatenated); // Update for question 11
       }
     }
-  }, [selected1, updateAnswers]);
+  }, [selected1]);
 
   useEffect(() => {
     if (selected2.length === 2) {
       const concatenated = selected2.join('');
       if (concatenated !== previousConcatenatedRef2.current) {
-        previousConcatenatedRef2.current = concatenated;
-        updateAnswers(1, concatenated); // Update for question 12
+        previousConcatenatedRef2.current = concatenated
       }
     }
-  }, [selected2, updateAnswers]);
+  }, [selected2]);
+
+  const handleSelectChange = (index, value) => {
+    const newSelectedOptions = [...selectedOptions];
+    newSelectedOptions[index] = value;
+    setSelectedOptions(newSelectedOptions);
+  };
+
+  useEffect(() => {
+    if (JSON.stringify(selectedOptions) !== JSON.stringify(previousSelectedOptionsRef.current)) {
+      selectedOptions.forEach((option, index) => {
+        if (option) {
+          updateAnswers(index + 5, option); 
+        }
+      });
+      previousSelectedOptionsRef.current = selectedOptions; 
+    }
+  }, [selectedOptions, updateAnswers]);
+
+  const renderCheckboxOptions = (options, selected, handleChange, questionIndexStart) => {
+    return options.map((option) => (
+      <li key={option.value}>
+        <input
+          type="checkbox"
+          value={option.value}
+          checked={selected.includes(option.value)}
+          onChange={(e) => handleChange(e, selected, selected === selected1 ? setSelected1 : setSelected2, questionIndexStart)}
+          disabled={selected.length >= 2 && !selected.includes(option.value)}
+        />
+        {option.label}
+      </li>
+    ));
+  };
 
   return (
     <div className='border-[1px] w-full p-5 mb-[50px]'>
@@ -83,49 +102,19 @@ function Part2({ updateAnswers }) {
       <span className='mb-3 block'>Choose TWO letters, A-E.</span>
       <span className='block mb-4'>What are the TWO primary benefits of employment within the banking sector?</span>
       <ul>
-        {options1.map((option) => (
-          <li key={option.value}>
-            <input
-              type="checkbox"
-              value={option.value}
-              checked={selected1.includes(option.value)}
-              onChange={handleCheckboxChange1}
-              disabled={selected1.length >= 2 && !selected1.includes(option.value)}
-            />
-            {option.label}
-          </li>
-        ))}
+        {renderCheckboxOptions(options1, selected1, handleCheckboxChange, 0)} {/* Update starting at index 0 for question 11 */}
       </ul>
 
       <strong className='mb-4 block mt-4'>Questions 13 and 14</strong>
       <span className='block'>Choose TWO letters, A-E.</span>
       <span className='block mt-3 mb-3'>Which TWO of the following points about New Horizons Bank are mentioned by David?</span>
       <ul>
-        {options2.map((option) => (
-          <li key={option.value}>
-            <input
-              type="checkbox"
-              value={option.value}
-              checked={selected2.includes(option.value)}
-              onChange={handleCheckboxChange2}
-              disabled={selected2.length >= 2 && !selected2.includes(option.value)}
-            />
-            {option.label}
-          </li>
-        ))}
+      {renderCheckboxOptions(options2, selected2, handleCheckboxChange, 2)} {/* Update starting at index 2 for question 13 */}
       </ul>
-      <strong className='mb-4 block mt-4'>
-        Questions 15-19
-      </strong>
-      <span className='block'>
-        What information does David provide about each of the following aspects of employment within the banking industry?
-      </span>
-      <span className='block mt-3 mb-3'>
-        Choose SIX answers from the box and write the correct letter, A-H, next to Questions 15-19.
-      </span>
-      <span className='block mt-3 mb-3'>
-        Aspects of employment within the banking industry:
-      </span>
+
+      <strong className='mb-4 block mt-4'>Questions 15-19</strong>
+      <span className='block'>What information does David provide about each of the following aspects of employment within the banking industry?</span>
+      <span className='block mt-3 mb-3'>Choose SIX answers from the box and write the correct letter, A-H, next to Questions 15-19.</span>
       <ul className='list-disc pl-5'>
         <li>A. Emphasizing lifelong learning</li>
         <li>B. Necessary for developing excellent customer experience</li>
@@ -143,8 +132,8 @@ function Part2({ updateAnswers }) {
             <span>{['Regulatory compliance', 'Qualifications and skills', 'Technological progress', 'Continuous professional development', 'Balancing work and personal life'][index]}</span>
             <select
               className='border-[2px] border-black rounded-[5px]'
-              value={selectedOptions[index + 5] || ''}
-              onChange={(e) => handleSelectChange(index + 5, e.target.value)}
+              value={selectedOptions[index] || ''}
+              onChange={(e) => handleSelectChange(index, e.target.value)}
             >
               <option value="">Select</option>
               {['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'].map((option) => (
@@ -154,10 +143,10 @@ function Part2({ updateAnswers }) {
           </li>
         ))}
       </ul>
+
       <strong className='mb-4 block mt-4'>Questions 20</strong>
       <span className='block'>Choose the correct letter, A, B, or C</span>
       <span className='block mt-3 mb-3'>What is David’s final remark on working in the Banking sector?</span>
-
       <ul>
         <li className='flex items-center gap-2'>
           <input type="radio" name="finalRemark" value="A" onChange={(e) => updateAnswers(10, e.target.value)} />
@@ -165,11 +154,11 @@ function Part2({ updateAnswers }) {
         </li>
         <li className='flex items-center gap-2'>
           <input type="radio" name="finalRemark" value="B" onChange={(e) => updateAnswers(10, e.target.value)} />
-          <strong>B.</strong> Offers a wide range of opportunities
+          <strong>B.</strong> It is more advantageous to change jobs regularly
         </li>
         <li className='flex items-center gap-2'>
           <input type="radio" name="finalRemark" value="C" onChange={(e) => updateAnswers(10, e.target.value)} />
-          <strong>C.</strong> Offers a competitive amount of money
+          <strong>C.</strong> It is irrelevant to change jobs frequently
         </li>
       </ul>
     </div>

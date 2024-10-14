@@ -8,7 +8,7 @@ function Hero() {
           <div>
             <h1 className='text-[70px] w-[700px] font-bold leading-[90px]'>
              <span className='bg-MainColor text-white px-[10px] rounded-[5px] cursor-pointer transition-all duration-500 hover:tracking-[10px]'>
-             Examify</span> yordamida ingliz tili darajangizni bilib oling
+             Examify/</span> yordamida ingliz tili darajangizni bilib oling
             </h1>
             <button className='mt-[20px] flex items-center gap-[5px] font-bold text-[20px] text-[white] border-[3px] border-MainColor px-[25px] py-[5px] transition-colors duration-[0.6s] rounded-[8px] bg-MainColor hover:bg-transparent hover:text-MainColor'>
               Start

@@ -4,14 +4,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { fetchData } from '../Redux/MyInformation';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+    const navigate = useNavigate()
     const [values, setValues] = useState(Array(6).fill(''));
     const [isSubmitted, setIsSubmitted] = useState(false); // Состояние для отслеживания отправки
     const [active, setActive] = useState(false)
     const dispatch = useDispatch()
     const { data, status} = useSelector((state)=>state.data)
 
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            navigate('/'); // Перенаправляет на главную страницу, если токен существует
+        }
+    }, [navigate]);
 
     useEffect(() => {
         // Предположим, что data содержит информацию о пользователе после получения данных
@@ -98,6 +107,7 @@ function Login() {
             window.location.reload()
             showTrue()
             setActive(false)
+            navigate('/')
         } catch (error) {
             console.log(error);
             showErrorToast(error?.response?.data?.message || 'Xato!')
