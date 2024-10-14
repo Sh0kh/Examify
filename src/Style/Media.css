@@ -31,6 +31,9 @@
     .TestModal{
         width: 30%;
     }
+    .MyResult__wrapper{
+        width: 100%;
+    }
 }
 @media(max-width:1000px){
     .Service__wrapper{
@@ -45,6 +48,14 @@
     }
     .Result__wrapper{
         width: 100% !important;
+    }
+    .MyResult__card{
+        display: flex;
+        align-items: start !important;
+        gap: 5px;
+    }
+    .myResult__grid{
+        flex-wrap: wrap;
     }
 }
 @media(max-width:950px){
@@ -120,6 +131,12 @@
     .TestModal{
         width: 40%;
     }
+    .myResult__grid{
+        gap: 5px;
+    }
+    .recom{
+        display: block;
+    }
 }
 @media(max-width:600px){
     .Service__wrapper{
@@ -165,6 +182,15 @@
     }
     .TestModal{
         width: 50%;
+    }
+    .MyResult__card{
+        flex-direction: column;
+        gap: 10px;
+        align-items: center !important;
+        justify-content: center;
+    }
+    .MyResult__wrapper{
+        text-align: center;
     }
 }
 @media(max-width:470px){

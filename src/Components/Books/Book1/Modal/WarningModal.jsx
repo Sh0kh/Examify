@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { playAudio } from '../../../../Redux/audioSlice';
 
 function WarningModal() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const [expired, setExpired] = useState(false);
+
+
+
     const Start = () => {
-        setExpired(!expired);
-        dispatch(playAudio())
+        setExpired(true);
+        dispatch(playAudio());
     };
-
-
-
 
     return (
         <div className={`fixed bg-[#000000b0] inset-0 flex items-center justify-center ${expired ? 'hidden' : ''}`}>

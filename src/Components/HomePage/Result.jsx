@@ -5,24 +5,37 @@ import ReactLoading from 'react-loading';
 
 function Result() {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
+  const [minutes, setMinutes] = useState(10); // Set initial minutes
+
   const getResult = async () => {
     try {
       const response = await axios.get('/ielts/exam/result/top-exam-result/MONTHLY?page=0&size=10');
       setData(response.data.results || []);
     } catch (error) {
       console.log(error);
-    }
-    finally {
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     getResult();
+
+    // Countdown Timer
+    const timer = setInterval(() => {
+      setMinutes((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 60000); // Decrement every minute
+
+    return () => clearInterval(timer); // Cleanup on unmount
   }, []);
 
-
+  const handleScrollUp = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
 
   if (loading) {
     return (
@@ -31,6 +44,7 @@ function Result() {
       </div>
     );
   }
+
   return (
     <section className='Result pb-[50px] mt-[80px]'>
       <div className='Container'>
@@ -40,6 +54,11 @@ function Result() {
         <p className='text-[20px] text-MainColor text-center'>
           Oxirgi 3 oydagi eng yaxshi natijalar
         </p>
+        <div className='text-center'>
+          <h2 className='text-[40px] text-MainColor'>
+            {minutes} {minutes === 1 ? 'minute' : 'minutes'} left
+          </h2>
+        </div>
         <div className='Result__wrapper relative flex items-center flex-col gap-[10px] w-[1000px] mt-[20px] mx-auto'>
           {Array.isArray(data) && data.length > 0 ? (
             data.map((i, index) => (
@@ -60,9 +79,10 @@ function Result() {
                   {i.overall}
                 </span>
                 <div>  
-                <span className='text-[20px] font-bold block'>{i.createdAt.split('T')[0]}</span> <span className='block text-center'>
-                  {i.createdAt.slice(11, 16)}
-                </span>
+                  <span className='text-[20px] font-bold block'>{i.createdAt.split('T')[0]}</span> 
+                  <span className='block text-center'>
+                    {i.createdAt.slice(11, 16)}
+                  </span>
                 </div>
               </div>
             ))
@@ -70,11 +90,10 @@ function Result() {
             <p>No results found.</p>
           )}
           <div className='Result__over'>
-
           </div>
         </div>
         <NavLink to={`/rating`}>
-          <button className='mx-auto mt-[40px] flex items-center gap-[5px] font-bold text-[20px] text-[white] border-[3px] border-MainColor px-[25px] py-[5px] transition-colors duration-[0.6s] rounded-[8px] bg-MainColor hover:bg-transparent hover:text-MainColor'>
+          <button onClick={handleScrollUp} className='mx-auto mt-[40px] flex items-center gap-[5px] font-bold text-[20px] text-[white] border-[3px] border-MainColor px-[25px] py-[5px] transition-colors duration-[0.6s] rounded-[8px] bg-MainColor hover:bg-transparent hover:text-MainColor'>
             Show more
             <svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'>
               <path fill='none' stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 3h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H9m6-9l-4-4m4 4l-4 4m4-4H5'></path>

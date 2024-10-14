@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 
 function Speaking1() {
     const [isRecording, setIsRecording] = useState(false);
@@ -11,6 +13,8 @@ function Speaking1() {
     const analyserRef = useRef(null);
     const microphoneRef = useRef(null);
     const processorRef = useRef(null);
+
+    const { ID } = useParams(); // Retrieve exam ID from URL
 
     useEffect(() => {
         return () => {
@@ -34,6 +38,7 @@ function Speaking1() {
                 const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
                 setAudioBlob(audioBlob);
                 stopAudioProcessing(); // Stop audio processing when recording stops
+                sendAudioToBackend(audioBlob); // Send audio when recording stops
             };
 
             recorder.start();
@@ -107,6 +112,32 @@ function Speaking1() {
         setVolume(0); // Reset volume
     };
 
+    const sendAudioToBackend = async (audioBlob) => {
+        const formData = new FormData();
+        formData.append('voiceAnswer', audioBlob, 'recording.wav');
+
+        try {
+            await axios.post(
+                `http://158.220.111.34:8080/api/ielts/exam/attempt/create/outline-speaking`,
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    params: {
+                        examId: ID,
+                        question: 'What did you study in history lessons when you were at school?',
+                        partNumber: 1,
+                    },
+                }
+            );
+            console.log('Audio sent successfully');
+        } catch (error) {
+            console.error('Error sending audio:', error);
+        }
+    };
+
     return (
         <div>
             <div className='border-[2px] p-[20px] mt-[20px]'>
@@ -135,12 +166,6 @@ function Speaking1() {
                     {/* Volume Indicator */}
                     {isRecording && (
                         <div className='mt-[10px] flex items-center'>
-                            <div className='w-full h-[5px] bg-gray-300 overflow-hidden flex flex flex-row-reverse'>
-                                <div
-                                    className='h-full bg-green-500'
-                                    style={{ width: `${volume * 100}%` }}
-                                ></div>
-                            </div>
                             <div className='w-full h-[5px] bg-gray-300 overflow-hidden flex'>
                                 <div
                                     className='h-full bg-green-500'

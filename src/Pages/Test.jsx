@@ -1,13 +1,14 @@
-import React from 'react'
-import TestItem from '../Components/Test/TestItem'
-
+import React from 'react';
+import TestItem from '../Components/Test/TestItem';
 
 function Test() {
+
+
   return (
     <main>
-       <TestItem/>
+      <TestItem />
     </main>
-  )
+  );
 }
 
-export default Test
+export default Test;

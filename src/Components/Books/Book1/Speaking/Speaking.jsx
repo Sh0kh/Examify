@@ -1,9 +1,9 @@
 import React from 'react';
-// import Part1 from './Part1/Part1';
+import Part1 from './Part1/Part1';
 import Part2 from './Part2/Part2';
 import { useDispatch } from 'react-redux';
 import { setComponent } from '../../../../Redux/ComponentSlice';
-// import Part3 from './Part3/Part3';
+import Part3 from './Part3/Part3';
 
 function Speaking() {
 
@@ -30,9 +30,9 @@ const handlNext = ()=>{
                 </div>
             </div>
             <div>
-                {/* <Part1 /> */}
+                <Part1 />
                 <Part2 />
-                {/* <Part3/> */}
+                <Part3/>
             </div>
         </div>
     );

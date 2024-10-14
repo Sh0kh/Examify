@@ -4,11 +4,12 @@ import Task2 from './Task2'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 function Writing() {
     const { ID } = useParams()
     const [answer1, setAnswer1] = useState('')
     const [answer2, setAnswer2] = useState('')
+    const navigate = useNavigate()
     const SendUserAnswer = async () => {
         try {
             const userAnswer = {
@@ -30,6 +31,9 @@ function Writing() {
                 },
             })
             showSuccessToast()
+            setTimeout(()=>{
+                navigate('/myResult')
+            },3000)
         } catch (error) {
             showErrorToast(error.response?.data?.message)
         }

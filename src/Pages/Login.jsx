@@ -12,7 +12,7 @@ function Login() {
     const [isSubmitted, setIsSubmitted] = useState(false); // Состояние для отслеживания отправки
     const [active, setActive] = useState(false)
     const dispatch = useDispatch()
-    const { data, status} = useSelector((state)=>state.data)
+    const { data, status } = useSelector((state) => state.data)
 
 
     useEffect(() => {
@@ -51,6 +51,24 @@ function Login() {
             }
         }
     };
+    const handlePaste = (e, index) => {
+        e.preventDefault(); // Предотвратить стандартное поведение вставки
+    
+        const pasteData = e.clipboardData.getData('text').split('').slice(0, 6); // Получить вставляемые символы и ограничить до 6
+        const newValues = [...values];
+    
+        // Заполнить значения инпутов
+        for (let i = 0; i < pasteData.length; i++) {
+            if (index + i < newValues.length) {
+                newValues[index + i] = pasteData[i].match(/^[0-9]$/) ? pasteData[i] : ''; // Убедиться, что это цифра
+            }
+        }
+    
+        setValues(newValues);
+    
+        // Установить фокус на следующий доступный инпут
+        inputRefs.current[Math.min(index + pasteData.length, 5)].focus();
+    };
 
     const handleKeyDown = (e, index) => {
         if (e.key === 'Backspace' && values[index] === '') {
@@ -87,9 +105,9 @@ function Login() {
 
 
     const [edit, setEdit] = useState({
-        name:'',
-        surname:'',
-        userId:''
+        name: '',
+        surname: '',
+        userId: ''
     })
     const EditMyInformation = async (e) => {
         e.preventDefault();
@@ -99,7 +117,7 @@ function Login() {
                 name: edit.name,
                 surname: edit.surname
             };
-            await axios.put(`/user/update-information`, EditData,{
+            await axios.put(`/user/update-information`, EditData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
@@ -125,7 +143,7 @@ function Login() {
             progress: undefined,
             style: {
                 backgroundColor: '#1B2A3D',
-                color:'white'
+                color: 'white'
             }
         });
     };
@@ -139,9 +157,9 @@ function Login() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-               style: {
+            style: {
                 backgroundColor: '#1B2A3D',
-                color:'white'
+                color: 'white'
             }
         });
     };
@@ -157,12 +175,12 @@ function Login() {
             progress: undefined,
             style: {
                 backgroundColor: '#1B2A3D',
-                color:'white'
+                color: 'white'
             }
         });
     };
 
-    const skip = () =>{
+    const skip = () => {
         setActive(false)
         window.location.reload()
     }
@@ -192,6 +210,7 @@ function Login() {
                             ref={(el) => (inputRefs.current[index] = el)}
                             value={value}
                             onChange={(e) => handleChange(e, index)}
+                            onPaste={(e) => handlePaste(e, index)} // Добавляем обработчик вставки
                             onKeyDown={(e) => handleKeyDown(e, index)}
                             type="text"
                             className="py-[10px] text-center text-[25px] border-[2px] border-MainColor px-[10px] w-[50px] rounded-[16px] "
@@ -203,7 +222,7 @@ function Login() {
                 </form>
             </div>
             <div className={`fixed inset-0 top-[-100px] z-50 ${active ? 'block' : 'hidden'}`}>
-                
+
             </div>
             <div className={`LoginModal bg-MainColor p-[20px] z-50 absolute rounded-[10px] w-[35%] h-[300px] transition-opacity duration-500 transform ${active ? 'opacity-100 scale-100' : 'opacity-0 scale-75 pointer-events-none'}`}>
                 <h2 className='text-[white] text-center text-[30px]'>
@@ -215,28 +234,28 @@ function Login() {
                             Name:
                         </h3>
                         <input id='name'
-                        value={edit.name}
-                        onChange={(e)=>setEdit({...edit, name:e.target.value})}
-                        className='w-full px-[10px] py-[5px] rounded-[8px] bg-transparent outline-none border-[2px] border-[white] text-white' type="text" />
+                            value={edit.name}
+                            onChange={(e) => setEdit({ ...edit, name: e.target.value })}
+                            className='w-full px-[10px] py-[5px] rounded-[8px] bg-transparent outline-none border-[2px] border-[white] text-white' type="text" />
                     </label>
                     <label htmlFor="SurName" className='w-full block'>
                         <h3 className='text-[white]'>
                             Surname:
                         </h3>
-                        <input 
-                        value={edit.surname}
-                        onChange={(e)=>setEdit({...edit, surname:e.target.value})}
-                        id='SurName' className='w-full px-[10px] py-[5px] rounded-[8px] bg-transparent outline-none border-[2px] border-[white] text-white' type="text" />
+                        <input
+                            value={edit.surname}
+                            onChange={(e) => setEdit({ ...edit, surname: e.target.value })}
+                            id='SurName' className='w-full px-[10px] py-[5px] rounded-[8px] bg-transparent outline-none border-[2px] border-[white] text-white' type="text" />
                     </label>
-                <div className='flex items-center justify-between w-full'>
-                <button  type='submit' className='bg-[white] px-[20px] py-[5px] rounded-[8px] text-[20px] border-[2px] transition duration-500 border-[white]  hover:text-[white] hover:bg-transparent '>
-                        Edit
-                    </button>
-                    <span onClick={skip} className='flex items-center gap-[10px] text-white cursor-pointer'>
-                        Skip 
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="m20 12l.354-.354l.353.354l-.353.354zm-15 .5a.5.5 0 0 1 0-1zm9.354-6.854l6 6l-.708.708l-6-6zm6 6.708l-6 6l-.708-.708l6-6zM20 12.5H5v-1h15z"></path></svg>
-                    </span>
-                </div>
+                    <div className='flex items-center justify-between w-full'>
+                        <button type='submit' className='bg-[white] px-[20px] py-[5px] rounded-[8px] text-[20px] border-[2px] transition duration-500 border-[white]  hover:text-[white] hover:bg-transparent '>
+                            Edit
+                        </button>
+                        <span onClick={skip} className='flex items-center gap-[10px] text-white cursor-pointer'>
+                            Skip
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="m20 12l.354-.354l.353.354l-.353.354zm-15 .5a.5.5 0 0 1 0-1zm9.354-6.854l6 6l-.708.708l-6-6zm6 6.708l-6 6l-.708-.708l6-6zM20 12.5H5v-1h15z"></path></svg>
+                        </span>
+                    </div>
                 </form>
             </div>
             <ToastContainer />
