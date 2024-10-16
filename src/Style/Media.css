@@ -62,6 +62,12 @@
     .Contact h1{
         width: auto;
     }
+    .speaking__wrapper{
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
 }
 @media(max-width:900px) {
     .Hero img {
@@ -198,6 +204,9 @@
     }
     .MyResult__wrapper{
         text-align: center;
+    }
+    .audio{
+        width: 100%;
     }
 }
 @media(max-width:480px){
