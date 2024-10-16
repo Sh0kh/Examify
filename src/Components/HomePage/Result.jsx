@@ -6,7 +6,6 @@ import ReactLoading from 'react-loading';
 function Result() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [minutes, setMinutes] = useState(10); // Set initial minutes
 
   const getResult = async () => {
     try {
@@ -21,13 +20,6 @@ function Result() {
 
   useEffect(() => {
     getResult();
-
-    // Countdown Timer
-    const timer = setInterval(() => {
-      setMinutes((prev) => (prev > 0 ? prev - 1 : 0));
-    }, 60000); // Decrement every minute
-
-    return () => clearInterval(timer); // Cleanup on unmount
   }, []);
 
   const handleScrollUp = () => {
@@ -54,11 +46,6 @@ function Result() {
         <p className='text-[20px] text-MainColor text-center'>
           Oxirgi 3 oydagi eng yaxshi natijalar
         </p>
-        <div className='text-center'>
-          <h2 className='text-[40px] text-MainColor'>
-            {minutes} {minutes === 1 ? 'minute' : 'minutes'} left
-          </h2>
-        </div>
         <div className='Result__wrapper relative flex items-center flex-col gap-[10px] w-[1000px] mt-[20px] mx-auto'>
           {Array.isArray(data) && data.length > 0 ? (
             data.map((i, index) => (
@@ -75,7 +62,7 @@ function Result() {
                   )}
                   <span className='text-[20px] w-[50px]'>{i?.user.name}</span>
                 </div>
-                <span>
+                <span className='px-[20px] py-[10px] border-[2px] border-MainColor rounded-[8px] bg-MainColor text-[white] duration-300 hover:bg-transparent hover:text-MainColor'>
                   {i.overall}
                 </span>
                 <div>  

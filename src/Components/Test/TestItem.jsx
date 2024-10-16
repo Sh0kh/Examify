@@ -12,14 +12,15 @@ function TestItem() {
                 <h1 className='text-MainColor font-bold text-[55px] cursor-pointer transition-all duration-700 hover:tracking-widest'>
                     Books
                 </h1>
-                <div className='Test__wrapper'>
-                    <div onClick={ActiveModal} className='Test__card h-[500px] cursor-pointer  p-[20px] bg-MainColor rounded-[8px] transition duration-500 hover:shadow-xl'>
+                <div className='Test__wrapper '>
+                    <div onClick={ActiveModal} className='Test__card h-[400px] cursor-pointer  p-[20px] bg-MainColor rounded-[8px] transition duration-500 hover:shadow-xl'>
                         <img src={logo} className='w-[100px] cursor-pointer' alt="" />
-                        <h2 className='text-[white] text-[50px] my-[30px]'>
-                            Books 1
+                        <h2 className='text-[white] text-[50px] mt-[30px] h-[60px]'>
+                            Cambridge 
                         </h2>
-                        <img className='TestCard1' src={Bg} alt="foto" />
-                        <img className='TestCard2' src={Bg} alt="foto" />
+                        <span className='opacity-[0.5] text-[white] text-[30px]'>TEST 1</span>
+                        <img className='TestCard1 block mt-[30px]' src={Bg} alt="foto" />
+                        
                     </div>
                 </div>
             </div>
