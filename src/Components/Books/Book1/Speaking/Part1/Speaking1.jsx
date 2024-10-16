@@ -1,28 +1,32 @@
-import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 
 function Speaking1() {
     const [isRecording, setIsRecording] = useState(false);
     const [audioBlob, setAudioBlob] = useState(null);
-    const [timeLeft, setTimeLeft] = useState(10); // Timer for recording
-    const [volume, setVolume] = useState(0); // State to track volume level
+    const [timeLeft, setTimeLeft] = useState(30);
+    const [volume, setVolume] = useState(0);
+    const [suc, setSuc] = useState(null);
+    const [loading, setLoading] = useState(false);
     const timerRef = useRef(null);
     const mediaRecorderRef = useRef(null);
     const audioContextRef = useRef(null);
     const analyserRef = useRef(null);
     const microphoneRef = useRef(null);
     const processorRef = useRef(null);
+    const { ID } = useParams();
 
-    const { ID } = useParams(); // Retrieve exam ID from URL
+    if(audioBlob){
+    }
 
     useEffect(() => {
         return () => {
-            clearInterval(timerRef.current); // Clear the timer on component unmount
-            stopRecording(); // Ensure any ongoing recording is stopped
+            clearInterval(timerRef.current);
+            stopRecording();
         };
     }, []);
-
     const startRecording = async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -43,9 +47,8 @@ function Speaking1() {
 
             recorder.start();
             setIsRecording(true);
-            setTimeLeft(10); // Reset the timer
+            setTimeLeft(30); // Reset the timer
 
-            // Start the countdown timer
             timerRef.current = setInterval(() => {
                 setTimeLeft((prevTime) => {
                     if (prevTime <= 1) {
@@ -71,8 +74,13 @@ function Speaking1() {
             const dataArray = new Uint8Array(bufferLength);
 
             processor.onaudioprocess = () => {
-                analyser.getByteFrequencyData(dataArray);
-                const volumeValue = Math.max(...dataArray) / 256; // Normalize volume value
+                analyser.getByteTimeDomainData(dataArray);
+                let sum = 0;
+                for (let i = 0; i < dataArray.length; i++) {
+                    const value = (dataArray[i] - 128) / 128;
+                    sum += value * value;
+                }
+                const volumeValue = Math.sqrt(sum / dataArray.length); // RMS of the waveform
                 setVolume(volumeValue); // Update volume state
             };
 
@@ -85,12 +93,13 @@ function Speaking1() {
             console.error('Error accessing microphone', error);
         }
     };
+    
 
     const stopRecording = () => {
         if (mediaRecorderRef.current) {
             mediaRecorderRef.current.stop();
             setIsRecording(false);
-            clearInterval(timerRef.current); // Clear the timer when recording is stopped
+            clearInterval(timerRef.current);
         }
     };
 
@@ -109,14 +118,17 @@ function Speaking1() {
         analyserRef.current = null;
         processorRef.current = null;
         audioContextRef.current = null;
-        setVolume(0); // Reset volume
+        setVolume(0);
     };
+
     const sendAudioToBackend = async (audioBlob) => {
         const formData = new FormData();
         formData.append('voiceAnswer', audioBlob, 'recording.wav');
 
+        setLoading(true);
+
         try {
-            await axios.post(
+            const response = await axios.post(
                 `/ielts/exam/attempt/create/outline-speaking/${ID}`,
                 formData,
                 {
@@ -130,9 +142,16 @@ function Speaking1() {
                     },
                 }
             );
-            console.log('Audio sent successfully');
+
+            if (response.data.statusCode === 200) {
+                setSuc(true);
+            } else if (response.data.statusCode === 409) {
+                setSuc(false);
+            }
         } catch (error) {
-            console.error('Error sending audio:', error);
+            setSuc(false);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -141,38 +160,49 @@ function Speaking1() {
             <div className='border-[2px] p-[20px] mt-[20px]'>
                 <h2 className='font-bold text-[30px]'>Part 1</h2>
                 <p className='font-bold text-[20px] mb-[15px]'>
-                   1. What did you study in history lessons when you were at school?
+                    1. What did you study in history lessons when you were at school?
                 </p>
-                {audioBlob && !isRecording && (
-                    <div className='mt-[20px]'>
-                        <h4>Recorded Audio:</h4>
-                        <audio controls src={URL.createObjectURL(audioBlob)} />
+                {loading ? (
+                    <div className='flex items-center justify-center'>
+                        <ReactLoading type="spinningBubbles" color="#000" height={50} width={50} />
+                    </div>
+                ) : (
+                    <div className='w-[150px] mx-auto'>
+                        {!suc && (
+                            <button
+                                onClick={isRecording ? stopRecording : startRecording}
+                                className={`bg-blue-500 px-[20px] font-bold py-[7px] rounded-[8px] text-[white] transition duration-500 ${isRecording ? 'bg-red-600' : 'bg-green-600'}`}>
+                                {isRecording ? 'Stop Recording' : 'Start Recording'}
+                            </button>
+                        )}
+                        {isRecording && (
+                            <div className='mt-[10px] text-center'>
+                                <p className='font-bold text-[20px]'>Time Left: {timeLeft}s</p>
+                            </div>
+                        )}
+                        {isRecording && (
+                            <div className='mt-[10px] flex items-center'>
+                                <div className='w-full h-[5px] bg-gray-300 overflow-hidden flex'>
+                                    <div
+                                        className='h-full bg-green-500'
+                                        style={{ width: `${volume * 100}%` }}
+                                    ></div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 )}
-                <div className='w-[150px] mx-auto'>
-                    <button
-                        onClick={isRecording ? stopRecording : startRecording}
-                        className={`bg-blue-500 px-[20px] font-bold py-[7px] rounded-[8px] text-[white] transition duration-500 ${isRecording ? ' bg-red-600' : 'bg-green-600'}`}>
-                        {isRecording ? 'Stop Recording' : 'Start Recording'}
-                    </button>
-                    {/* Timer Display */}
-                    {isRecording && (
-                        <div className='mt-[10px] text-center'>
-                            <p className='font-bold text-[20px]'>Time Left: {timeLeft}s</p>
-                        </div>
-                    )}
-                    {/* Volume Indicator */}
-                    {isRecording && (
-                        <div className='mt-[10px] flex items-center'>
-                            <div className='w-full h-[5px] bg-gray-300 overflow-hidden flex'>
-                                <div
-                                    className='h-full bg-green-500'
-                                    style={{ width: `${volume * 100}%` }}
-                                ></div>
+                {suc !== null && !loading && (
+                    <div className='mx-auto w-[500px] text-center'>
+                        {suc ? (
+                            <h1>Audio submitted successfully!</h1>
+                        ) : (
+                            <div>
+                                <h1>Submission failed. Please try again.</h1>
                             </div>
-                        </div>
-                    )}
-                </div>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     );

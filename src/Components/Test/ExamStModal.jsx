@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { setRemainSection } from '../../Redux/ComponentSlice'; // Adjust the import path as necessary
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,7 +16,6 @@ function ExamStModal({ isOpen, onClose, data }) {
     dispatch(setRemainSection(remainSection));
     navigate(`/book1/${id}`);
   };
-  console.log(remainSection);
   
 
   return (

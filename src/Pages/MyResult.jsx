@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState, useCallback } from 'react';
 import ReactLoading from 'react-loading';
 import ExamStModal from '../Components/Test/ExamStModal';
+import { NavLink } from 'react-router-dom';
 
 function MyResult() {
   const [data, setData] = useState([]);
@@ -55,7 +56,6 @@ function MyResult() {
       setPage((prevPage) => prevPage + 1);
     }
   };
-  console.log(data);
   
 
   useEffect(() => {
@@ -139,22 +139,30 @@ function MyResult() {
                       </svg>
                     </div>
                   )}
+                  <NavLink to={`/reading/${i.examId}`}>
                   <div className='rounded-[8px] bg-MainColor p-[10px] px-[5px] w-[120px] text-center cursor-pointer'>
                     <h2 className='text-[white] font-bold text-[22px]'>Reading</h2>
                     <span className='text-[white] block text-center text-[20px]'>{i.reading}</span>
                   </div>
+                  </NavLink>
+                  <NavLink to={`/speaking/${i.examId}`}>
                   <div className='rounded-[8px] bg-MainColor p-[10px] px-[5px] w-[120px] text-center cursor-pointer'>
                     <h2 className='text-[white] font-bold text-[22px]'>Speaking</h2>
                     <span className='text-[white] block text-center text-[20px]'>{i.speaking}</span>
                   </div>
+                  </NavLink>
+                  <NavLink to={`/writing/${i.examId}`}>
                   <div className='rounded-[8px] bg-MainColor p-[10px] px-[5px] w-[120px] text-center cursor-pointer'>
                     <h2 className='text-[white] font-bold text-[22px]'>Writing</h2>
                     <span className='text-[white] block text-center text-[20px]'>{i.writing}</span>
                   </div>
+                  </NavLink>
+                  <NavLink to={`/listening/${i.examId}`}>
                   <div className='rounded-[8px] bg-MainColor p-[10px] px-[5px] w-[120px] text-center cursor-pointer'>
                     <h2 className='text-[white] font-bold text-[22px]'>Listening</h2>
                     <span className='text-[white] block text-center text-[20px]'>{i.listening}</span>
                   </div>
+                  </NavLink>
                 </div>
               </div>
             ))

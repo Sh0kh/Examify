@@ -36,6 +36,10 @@ function Writing() {
             },3000)
         } catch (error) {
             showErrorToast(error.response?.data?.message)
+            if (401 === error.response.data.status) {
+                localStorage.clear(); // Очистка localStorage
+                navigate('/login'); // Переход на страницу входа
+            }     
         }
     }
 

@@ -1,21 +1,29 @@
+import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 
 function Speaking3() {
     const [isRecording, setIsRecording] = useState(false);
     const [audioBlob, setAudioBlob] = useState(null);
-    const [timeLeft, setTimeLeft] = useState(10); 
-    const [volume, setVolume] = useState(0); 
+    const [timeLeft, setTimeLeft] = useState(30); 
+    const [volume, setVolume] = useState(0); // State to track volume level
+    const [suc, setSuc] = useState(null); // State to track success of audio submission
+    const [loading, setLoading] = useState(false); // Set initial loading state to false
     const timerRef = useRef(null);
     const mediaRecorderRef = useRef(null);
     const audioContextRef = useRef(null);
     const analyserRef = useRef(null);
     const microphoneRef = useRef(null);
     const processorRef = useRef(null);
+    const { ID } = useParams(); // Retrieve exam ID from URL
 
+    if(audioBlob){
+    }
     useEffect(() => {
         return () => {
-            clearInterval(timerRef.current); 
-            stopRecording(); 
+            clearInterval(timerRef.current); // Clear the timer on component unmount
+            stopRecording(); // Ensure any ongoing recording is stopped
         };
     }, []);
 
@@ -33,24 +41,25 @@ function Speaking3() {
             recorder.onstop = () => {
                 const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
                 setAudioBlob(audioBlob);
-                stopAudioProcessing(); 
+                stopAudioProcessing(); // Stop audio processing when recording stops
+                sendAudioToBackend(audioBlob); // Send audio when recording stops
             };
 
             recorder.start();
             setIsRecording(true);
-            setTimeLeft(10);
+            setTimeLeft(30); // Reset the timer
 
             timerRef.current = setInterval(() => {
                 setTimeLeft((prevTime) => {
                     if (prevTime <= 1) {
-                        stopRecording(); 
-                        return 0; 
+                        stopRecording(); // Automatically stop recording
+                        return 0; // Ensure timer shows 0
                     }
-                    return prevTime - 1; 
+                    return prevTime - 1; // Decrease time
                 });
-            }, 1000);
+            }, 1000); // Decrease every second
 
-
+            // Create audio context and analyser for volume indication
             const audioContext = new (window.AudioContext || window.webkitAudioContext)();
             const analyser = audioContext.createAnalyser();
             const microphone = audioContext.createMediaStreamSource(stream);
@@ -65,9 +74,14 @@ function Speaking3() {
             const dataArray = new Uint8Array(bufferLength);
 
             processor.onaudioprocess = () => {
-                analyser.getByteFrequencyData(dataArray);
-                const volumeValue = Math.max(...dataArray) / 256; 
-                setVolume(volumeValue); 
+                analyser.getByteTimeDomainData(dataArray);
+                let sum = 0;
+                for (let i = 0; i < dataArray.length; i++) {
+                    const value = (dataArray[i] - 128) / 128;
+                    sum += value * value;
+                }
+                const volumeValue = Math.sqrt(sum / dataArray.length); // RMS of the waveform
+                setVolume(volumeValue); // Update volume state
             };
 
             audioContextRef.current = audioContext;
@@ -84,7 +98,7 @@ function Speaking3() {
         if (mediaRecorderRef.current) {
             mediaRecorderRef.current.stop();
             setIsRecording(false);
-            clearInterval(timerRef.current); 
+            clearInterval(timerRef.current); // Clear the timer when recording is stopped
         }
     };
 
@@ -106,34 +120,70 @@ function Speaking3() {
         setVolume(0); // Reset volume
     };
 
+    const sendAudioToBackend = async (audioBlob) => {
+        const formData = new FormData();
+        formData.append('voiceAnswer', audioBlob, 'recording.wav');
+
+        setLoading(true); // Start loading before the request
+
+        try {
+            const response = await axios.post(
+                `/ielts/exam/attempt/create/outline-speaking/${ID}`,
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    params: {
+                        question: '3. How often do you watch TV programmes about history now ?',
+                        partNumber: 1,
+                    },
+                }
+            );
+
+            if (response.data.statusCode === 200) {
+                setSuc(true); // Success
+            } else if (response.data.statusCode === 409) {
+                setSuc(false); // Retry case
+            }
+        } catch (error) {
+            setSuc(false); // If there's an error, ensure to allow retry
+        } finally {
+            setLoading(false); // End loading after the request completes
+        }
+    };
+
     return (
         <div>
             <div className='border-[2px] p-[20px] mt-[20px]'>
                 <h2 className='font-bold text-[30px]'>Part 1</h2>
                 <p className='font-bold text-[20px] mb-[15px]'>
-                    3. How often do you watch TV programmes about history now ?
+                3. How often do you watch TV programmes about history now ?
                 </p>
-                {audioBlob && !isRecording && (
-                    <div className='mt-[20px]'>
-                        <h4>Recorded Audio:</h4>
-                        <audio controls src={URL.createObjectURL(audioBlob)} />
+                {/* Loading Indicator */}
+                {loading ? (
+                    <div className='flex items-center justify-center'>
+                        <ReactLoading type="spinningBubbles" color="#000" height={50} width={50} />
                     </div>
-                )}
-                <div className='w-[150px] mx-auto'>
-                    <button
-                        onClick={isRecording ? stopRecording : startRecording}
-                        className={`bg-blue-500 px-[20px] font-bold py-[7px] rounded-[8px] text-[white] transition duration-500 ${isRecording ? ' bg-red-600' : 'bg-green-600'}`}>
-                        {isRecording ? 'Stop Recording' : 'Start Recording'}
-                    </button>
-                    {/* Timer Display */}
-                    {isRecording && (
-                        <div className='mt-[10px] text-center'>
-                            <p className='font-bold text-[20px]'>Time Left: {timeLeft}s</p>
-                        </div>
-                    )}
-                    {/* Volume Indicator */}
-                    {isRecording && (
-                        <div className='mt-[10px] flex items-center'>
+                ) : (
+                    <div className='w-[150px] mx-auto'>
+                        {!suc  && (
+                            <button
+                                onClick={isRecording ? stopRecording : startRecording}
+                                className={`bg-blue-500 px-[20px] font-bold py-[7px] rounded-[8px] text-[white] transition duration-500 ${isRecording ? 'bg-red-600' : 'bg-green-600'}`}>
+                                {isRecording ? 'Stop Recording' : 'Start Recording'}
+                            </button>
+                        )}
+                        {/* Timer Display */}
+                        {isRecording && (
+                            <div className='mt-[10px] text-center'>
+                                <p className='font-bold text-[20px]'>Time Left: {timeLeft}s</p>
+                            </div>
+                        )}
+                        {/* Volume Indicator */}
+                        {isRecording && (
+                            <div className='mt-[10px] flex items-center'>
                             <div className='w-full h-[5px] bg-gray-300 overflow-hidden flex flex flex-row-reverse'>
                                 <div
                                     className='h-full bg-green-500'
@@ -147,8 +197,22 @@ function Speaking3() {
                                 ></div>
                             </div>
                         </div>
-                    )}
-                </div>
+                        )}
+                    </div>
+                )}
+                {suc !== null && !loading && (
+                    <div className='mx-auto w-[500px] text-center'>
+                        {suc ? (
+                            <h1>
+                                Audio submitted successfully! 
+                            </h1>
+                        ) : (
+                            <div>
+                                <h1>Submission failed. Please try again.</h1>
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     );

@@ -7,15 +7,25 @@ import Part4 from './Part4';
 import { useDispatch } from 'react-redux';
 import { setComponent } from '../../../../Redux/ComponentSlice';
 import axios from '../../../../Service/axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 // import audioFile from './listening_audio_dce7445b-535f-4522-80bd-9eefb6bf9abc.mp3';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 function Listening() {
+    const navigate = useNavigate()
     const { ID } = useParams()
     const [active, setActive] = useState(1);
     const [answers, setAnswers] = useState(Array(40).fill('')); // Adjust size if needed
+
+
+    const out = () => {
+        navigate(-1); 
+        setTimeout(() => {
+            window.location.reload(); 
+        }, 1000); 
+    };
 
     const parts = [
         { id: 1, component: <Part1 updateAnswers={(index, data) => updateAnswers(index, data, 0)} answers={answers.slice(0, 10)} /> },
@@ -30,8 +40,6 @@ function Listening() {
         const updatedAnswers = [...answers]; // Создаем копию массива
         updatedAnswers[adjustedIndex] = data; // Обновляем нужный элемент
         setAnswers(updatedAnswers); // Устанавливаем обновленный массив в состояние
-        console.log(`Ответы обновлены для вопроса ${adjustedIndex + 1}: ${data}`);
-        console.log('Текущее состояние ответов:', updatedAnswers); // Лог текущих ответов
     };
     // const [audio] = useState(new Audio(audioFile));
 
@@ -77,6 +85,10 @@ function Listening() {
         }catch(error){
             console.log(error);
             showErrorToast(error.response?.data?.message || 'Xato!')
+            if (401 === error.response.data.status) {
+                localStorage.clear(); // Очистка localStorage
+                navigate('/login'); // Переход на страницу входа
+            }            
         }
     }
 
@@ -119,7 +131,7 @@ function Listening() {
                 <div className='flex items-center justify-between'>
                     <h2>Listening exam</h2>
                     <div className='flex items-center gap-[10px]'>
-                        <button className='bg-[red] px-[20px] font-bold py-[7px] rounded-[8px] text-[white] transition duration-500 border-[2px] border-[red] hover:bg-transparent hover:text-[red]'>
+                        <button onClick={out} className='bg-[red] px-[20px] font-bold py-[7px] rounded-[8px] text-[white] transition duration-500 border-[2px] border-[red] hover:bg-transparent hover:text-[red]'>
                             Leave exam
                         </button>
                         <button

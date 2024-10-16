@@ -4,12 +4,13 @@ import Part2 from './Part2';
 import Part3 from './Part3';
 import { useDispatch } from 'react-redux';
 import { setComponent } from '../../../../Redux/ComponentSlice';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Reading() {
+    const navigate = useNavigate()
     const { ID } = useParams()
     const [active, setActive] = useState(1);
     const [answers, setAnswers] = useState(Array(40).fill(''))
@@ -20,13 +21,18 @@ function Reading() {
         { id: 3, component: <Part3 updateAnswers={(index, data) => updateAnswers(index, data, 26)} answers={answers.slice(26, 40)} /> },
     ];
 
+    const out = () => {
+        navigate(-1); 
+        setTimeout(() => {
+            window.location.reload(); 
+        }, 1000); 
+    };
+
     const updateAnswers = (index, data, offset) => {
         const adjustedIndex = index + offset;
         const updateAnswers = [...answers];
         updateAnswers[adjustedIndex] = data;
         setAnswers(updateAnswers)
-        console.log(`Ответы обновлены для вопроса ${adjustedIndex + 1}: ${data}`);
-        console.log('Текущее состояние ответов:', updateAnswers); // Лог текущих ответов
     }
 
     const dispatch = useDispatch()
@@ -54,7 +60,10 @@ function Reading() {
             showSuccessToast()
             dispatch(setComponent('SPEAKING'))
         } catch (error) {
-            console.log(error);
+            if (401 === error.response.data.status) {
+                localStorage.clear(); // Очистка localStorage
+                navigate('/login'); // Переход на страницу входа
+            }     
             showErrorToast(error.response?.data?.message || 'Error!')
         }
     }
@@ -98,7 +107,7 @@ function Reading() {
                 <div className='flex items-center justify-between'>
                     <h2>Reading  exam</h2>
                     <div className='flex items-center gap-[10px]'>
-                        <button className='bg-[red] px-[20px] font-bold py-[7px] rounded-[8px] text-[white] transition duration-500 border-[2px] border-[red] hover:bg-transparent hover:text-[red]'>
+                        <button onClick={out} className='bg-[red] px-[20px] font-bold py-[7px] rounded-[8px] text-[white] transition duration-500 border-[2px] border-[red] hover:bg-transparent hover:text-[red]'>
                             Leave exam
                         </button>
                         <button
