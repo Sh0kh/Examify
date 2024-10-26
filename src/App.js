@@ -18,6 +18,7 @@ import Reading from './Components/Result/Reading';
 import Writing from './Components/Result/Writing';
 import Speaking from './Components/Result/Speaking';
 import PrivateRoute from './Components/PrivateRoute'; // Import PrivateRoute
+import Bonus from './Pages/Bonus';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
               <Route path='/test' element={<Test />} />
               <Route path='/faq' element={<FAQ />} />
               <Route path='/rating' element={<Rating />} />
+              <Route path='/bonus' element={<PrivateRoute element={<Bonus/>}/>}/>
               <Route 
               path='/myResult' 
               element={

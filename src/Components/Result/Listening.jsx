@@ -41,7 +41,7 @@ export default function Listening() {
   }
 
   return (
-    <div className='Listening pt-[100px]'>
+    <div className='Listening pt-[130px]'>
       <div className='Container'>
         <h1 className='font-bold text-[40px] text-center'>
           Your listening result

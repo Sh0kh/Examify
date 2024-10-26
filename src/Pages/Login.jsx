@@ -194,7 +194,7 @@ function Login() {
                 <p className="text-[30px] text-MainColor">
                     <a
                         className="text-MainColor border-b-[3px] border-MainColor"
-                        href="https://t.me/CodevanExamify_bot"
+                        href="https://t.me/codevanbot"
                         target="_blank"
                         rel="noopener noreferrer"
                     >

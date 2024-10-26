@@ -30,6 +30,10 @@ function TestModal({ isOpen, onClose }) {
 
         } catch (error) {
             showErrorToast(error?.response?.data?.message || 'Error!');
+            console.log(error);
+            if(error.response?.status === 401){
+                navigate('/login')
+            }
         }
     };
 

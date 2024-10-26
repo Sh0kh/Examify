@@ -43,6 +43,9 @@ function HeaderMenu({ isOpen, onClose }) {
                             <h2 className='text-[white]'>
                                 {data?.phoneNumber}
                             </h2>
+                            <h3 className='font-bold text-[white]'>
+                       Exam limit: {data?.todayExamCount}
+                      </h3>
                             <div className='w-full h-[2px] bg-[white] mt-[20px]'>
 
                             </div>

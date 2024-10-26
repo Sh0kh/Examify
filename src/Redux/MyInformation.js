@@ -13,7 +13,7 @@ export const fetchData = createAsyncThunk('data/fetchData', async (_, { rejectWi
     } catch (error) {
         if (error.response && error.response.status === 401) {
             localStorage.removeItem('token');
-        }
+        }           
     }
 });
 

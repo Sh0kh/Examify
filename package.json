@@ -24,7 +24,9 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.5",
     "recorder-js": "^1.0.7",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "gsap": "^3.12.5",
+    "@gsap/react": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

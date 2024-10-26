@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import { styled } from '@mui/material/styles';
+
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 
 // Individual styled accordions
 const StyledAccordion1 = styled(Accordion)(({ theme }) => ({
@@ -90,10 +96,42 @@ function FAQ() {
         setExpanded(isExpanded ? panel : false);
     };
 
+
+    useEffect(() => {
+        gsap.fromTo(
+          '.FAQ__title',
+          { opacity: 0 },
+          {
+            opacity: 1,
+            ease: 'power3.out',
+            duration: 0.5,
+            delay: 0.2,
+            scrollTrigger: {
+              trigger: '.FAQ__title',
+              start: 'top 90%',
+            },
+          }
+        );
+        gsap.fromTo(
+          '.HFAQ__wrapper',
+          { opacity: 0 },
+          {
+            opacity: 1,
+            ease: 'power3.out',
+            duration: 1,
+            delay: 0.5,
+            scrollTrigger: {
+              trigger: '.HFAQ__wrapper',
+              start: 'top 95%',
+            },
+          }
+        );
+      }, []);
+
     return (
         <section className='HFAQ pb-[100px] mt-[80px]'>
             <div className='Container'>
-                <h1 className='text-MainColor text-center font-bold text-[55px] cursor-pointer transition-all duration-700 hover:tracking-[20px]'>
+                <h1 className='FAQ__title text-MainColor text-center font-bold text-[55px] cursor-pointer transition-all duration-700 hover:tracking-[20px]'>
                     FAQ
                 </h1>
                 <div className='HFAQ__wrapper flex justify-between gap-[30px] mt-[20px]'>

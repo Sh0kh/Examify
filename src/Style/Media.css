@@ -78,8 +78,10 @@
         text-align: center;
         justify-content: center;
     }
-    .Hero button{
+    .Hero a{
         margin: 0 auto;
+        margin-top: 20px;
+        text-align: center;
     }
     
 }

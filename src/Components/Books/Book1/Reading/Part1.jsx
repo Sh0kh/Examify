@@ -3,7 +3,7 @@ import React from 'react'
 function Part1({ updateAnswers, answers }) {
     return (
         <div className='overflow-hidden flex gap-[20px] border-t-[2px] pt-[10px]'>
-            <div className='overflow-y-scroll h-[550px]  w-[50%] px-[15px] pb-[50px]'>
+            <div className='overflow-y-scroll h-screen  w-[50%] px-[15px] pb-[150px]'>
                 <strong className='my-[15px] block'>
                     A
                 </strong>
@@ -59,7 +59,7 @@ function Part1({ updateAnswers, answers }) {
                     This comprehensive exploration of developments beyond paper underscores the transformative impact of information technology on modern society. By embracing digital alternatives and leveraging emerging technologies, we can navigate towards a more connected, efficient, and sustainable future, transcending the limitations of traditional paper-based systems.
                 </p>
             </div>
-            <div className='overflow-y-scroll h-[550px] w-[50%]'>
+            <div className='overflow-y-scroll h-screen pb-[150px] w-[50%]'>
                 <strong className='my-[20px] block text-[22px]'>
                     Questions 1-4
                 </strong>

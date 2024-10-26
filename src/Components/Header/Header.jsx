@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import logo from '../../images/Examify.png';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import HeaderMenu from './HeaderMenu';
 import { Spin as Hamburger } from 'hamburger-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '../../Redux/MyInformation';
 
 function Header() {
+  const location = useLocation()
   const [active, setActive] = useState(false);
   const toggleMenu = () => setActive(!active);
   const closeMenu = () => setActive(false);
@@ -44,11 +45,13 @@ function Header() {
   return (
     <div>
       <header className='Header fixed w-full bg-white z-50 py-[15px] border-b-[1px] border-b-MainColor'>
-      <div className=' top-0 w-[full] p-[5px] bg-[red] recom hidden'>
-          <h1 className='text-center text-[white]'>
-          For complete convenience, it is recommended to use a PC
-          </h1>
-      </div>
+        {location.pathname === '/test' && (
+          <div className=' top-0 w-[full] p-[5px] bg-[red] recom hidden'>
+            <h1 className='text-center text-[white]'>
+              For complete convenience, it is recommended to use a PC
+            </h1>
+          </div>
+        )}
         <div className='Container'>
           <div className='header__wrapper flex items-center justify-between'>
             <NavLink onClick={handleScrollUp} to={`/`}>
@@ -70,6 +73,9 @@ function Header() {
               )}
               <NavLink onClick={handleScrollUp} to={`/contact`} className="font-bold text-[20px] transition-all duration-500 hover:tracking-widest">
                 Bog`lanish
+              </NavLink>
+              <NavLink onClick={handleScrollUp} to={`/bonus`} className="font-bold text-[20px] transition-all duration-500 hover:tracking-widest">
+                Bonus
               </NavLink>
             </nav>
             <div className='flex items-center gap-[5px] relative'>
@@ -97,10 +103,13 @@ function Header() {
                   className='fixed inset-0 z-50 modal-overlay'
                   onClick={handleOutsideClick}
                 >
-                  <div className='fixed right-[7%] border-[1px] border-MainColor top-[80px] bg-white rounded-[8px] p-[10px] shadow-2xl'>
+                  <div className='fixed right-[16%] border-[1px] border-MainColor top-[80px] bg-white rounded-[8px] p-[10px] shadow-2xl'>
                     <div>
-                      <h3 className='font-bold'>{data.name}</h3>
-                      <h3>{data.phoneNumber}</h3>
+                      <h3 className='font-bold'>{data?.name}</h3>
+                      <h3>{data?.phoneNumber}</h3>
+                      <h3 className='font-bold'>
+                       Exam limit: {data?.todayExamCount}
+                      </h3>
                     </div>
                     <div className='w-full h-[1px] my-[7px] bg-MainColor'></div>
                     <button onClick={exit} className='flex items-center gap-[10px] font-bold border-MainColor text-MainColor rounded-[8px] border-[2px] px-[20px] py-[3px] transition duration-500 hover:bg-MainColor hover:text-[white]'>

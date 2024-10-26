@@ -40,7 +40,7 @@ export default function Reading() {
     }
 
     return (
-        <div className='Reading pt-[100px]'>
+        <div className='Reading pt-[130px]'>
             <div className='Container'>
                 <h1 className='font-bold text-[40px] text-center'>
                     Your Reading result

@@ -5,7 +5,7 @@ function Test() {
 
 
   return (
-    <main>
+    <main className='h-screen'>
       <TestItem />
     </main>
   );
