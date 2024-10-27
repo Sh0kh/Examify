@@ -6,8 +6,8 @@ import ReactLoading from 'react-loading';
 function Part2() {
     const { ID } = useParams();
     const [isRecording, setIsRecording] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(3); // Первый таймер (обратный отсчет)
-    const [secondTimer, setSecondTimer] = useState(10); // Второй таймер (время записи)
+    const [timeLeft, setTimeLeft] = useState(30); // Первый таймер (обратный отсчет)
+    const [secondTimer, setSecondTimer] = useState(60); // Второй таймер (время записи)
     const [volume, setVolume] = useState(0); // Уровень громкости
     const [loading, setLoading] = useState(false); // Уровень загрузки
     const [success, setSuccess] = useState(null); // Статус отправки

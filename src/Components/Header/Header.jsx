@@ -66,7 +66,7 @@ function Header() {
                   Home
                 </NavLink>
                 <NavLink onClick={handleScrollUp} to={`/test`} className="font-bold text-[20px] transition-all duration-500 hover:tracking-[8px]">
-                  TEST
+                  Take exam
                 </NavLink>
                 {token && (
                     <NavLink onClick={handleScrollUp} to={`/myResult`} className="font-bold text-[20px] transition-all duration-500 hover:tracking-[10px]">

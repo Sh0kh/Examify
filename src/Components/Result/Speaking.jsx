@@ -26,32 +26,26 @@ function Speaking() {
         getSpeakingResult();
     }, [getSpeakingResult]);
 
-
-    if (!data || data.length === 0) {
-        return (
-            <div className='flex items-center justify-center h-screen'>
-                <h1 className='text-[25px] font-bold'>No result</h1>
-            </div>
-        );
-    }
-
+    const roundToIeltsScore = (score) => {
+        return (Math.round(score * 2) / 2).toFixed(1);
+    };
 
     const renderTranscription = (transcriptions) => {
         if (!transcriptions || transcriptions.length === 0) {
-            return <p className='text-center text-[20px] mt-[20px]'>No transcription available</p>;
+            return <p className='text-center text-lg mt-5 text-gray-500'>No transcription available</p>;
         }
 
         return transcriptions.map((item, index) => (
-            <div key={index} className='mb-[20px] border-[2px] border-MainColor rounded-[8px] p-[5px]'>
-                <h1 className='font-bold text-[25px] my-[12px]'>Question:</h1>
-                <p>{item.question}</p>
-                <h1 className='font-bold text-[25px] my-[12px]'>Transcription:</h1>
-                <p>{item.transcription}</p>
-                <h1 className='font-bold text-[25px] my-[12px]'>Comment:</h1>
-                <p>{item.feedback}</p>
+            <div key={index} className='mb-5 border-2 border-black rounded-lg p-5 bg-white shadow-md'>
+                <h1 className='font-bold text-xl my-3 text-black'>Question:</h1>
+                <p className='text-black'>{item.question}</p>
+                <h1 className='font-bold text-xl my-3 text-black'>Transcription:</h1>
+                <p className='text-black'>{item.transcription}</p>
+                <h1 className='font-bold text-xl my-3 text-black'>Comment:</h1>
+                <p className='text-black'>{item.feedback}</p>
                 {item.voiceUrl && (
-                    <div className='mt-[20px]'>
-                        <h1 className='font-bold text-[25px] my-[12px]'>Listen to the Audio:</h1>
+                    <div className='mt-5'>
+                        <h1 className='font-bold text-xl my-3 text-black'>Listen to the Audio:</h1>
                         <audio className='audio' controls>
                             <source src={`${CONFIG.API_URL}${item.voiceUrl}`} type="audio/mpeg" />
                             Your browser does not support the audio tag.
@@ -63,53 +57,37 @@ function Speaking() {
     };
 
     return (
-        <div className='Speaking pt-[130px] pb-[100px] h-screen'>
-            <div className='Container'>
-                <h1 className='font-bold text-[40px] text-center'>Your Speaking Result</h1>
-                <h2 className='text-center text-[25px]'>Your answer</h2>
-                <div className='mt-[30px] flex items-center justify-between gap-[20px]'>
-                    {[1, 2, 3].map((num) => (
-                        <button
-                            key={num}
-                            className={`w-full py-[5px] ${part === num ? 'bg-MainColor text-white' : 'bg-white text-black'} border-[2px] border-MainColor rounded-[8px]`}
-                            onClick={() => setPart(num)}
-                        >
-                            Part {num}
-                        </button>
-                    ))}
-                </div>
-                <div className='mt-[20px]'>
-                    <div className='border-[2px] border-MainColor rounded-[8px] p-[20px]'>
-                        <h1 className='text-[25px] font-bold'>Part {data.part_number} Score: {data.part_band_score}</h1>
-                        <div className='speaking__wrapper flex items-center justify-between mt-[20px]'>
-                            <div className='text-center border-[2px] border-MainColor rounded-[8px] p-[2px]'>
-                                <span className='text-[25px] block'>Coherence</span>
-                                <span className='font-bold text-[25px] block'>{data.coherence_score}</span>
+        <div className='flex flex-col h-screen bg-gray-50'>
+            <div className='Speaking flex-1 pt-32 pb-20 overflow-y-auto'>
+                <div className='Container mx-auto max-w-2xl px-4'>
+                    <h1 className='font-bold text-4xl text-center text-black'>Your Speaking Result</h1>
+                    <h2 className='text-center text-2xl text-black'>Your answer</h2>
+                    <div className='mt-8 flex items-center justify-between gap-4'>
+                        {[1, 2, 3].map((num) => (
+                            <button
+                                key={num}
+                                className={`w-full py-3 text-lg font-semibold rounded-lg transition duration-300 ${part === num ? 'bg-white text-black border border-black' : 'bg-white text-black border border-black'} hover:bg-black hover:text-white`}
+                                onClick={() => setPart(num)}
+                            >
+                                Part {num}
+                            </button>
+                        ))}
+                    </div>
+                    <div className='mt-5'>
+                        <div className='border-2 border-black rounded-lg p-5 bg-white shadow-md'>
+                            <h1 className='text-2xl font-bold text-black'>Part {data.part_number} Score: {roundToIeltsScore(data.part_band_score)}</h1>
+                            <div className='grid grid-cols-3 gap-4 mt-5'>
+                                {['coherence', 'fluency', 'grammar', 'vocabulary', 'relevance', 'topic_dev'].map((key) => (
+                                    <div key={key} className='text-center border-2 border-black rounded-lg p-3 bg-gray-100'>
+                                        <span className='text-lg block font-medium text-black'>{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                                        <span className='font-bold text-2xl block text-black'>{roundToIeltsScore(data[`${key}_score`]) || 'N/A'}</span>
+                                    </div>
+                                ))}
                             </div>
-                            <div className='text-center border-[2px] border-MainColor rounded-[8px] p-[2px]'>
-                                <span className='text-[25px] block'>Fluency</span>
-                                <span className='font-bold text-[25px] block'>{data.fluency_score}</span>
+                            <div className='mt-5'>
+                                <h1 className='font-bold text-xl mb-4 text-black'>Transcriptions:</h1>
+                                {renderTranscription(data.transcription)}
                             </div>
-                            <div className='text-center border-[2px] border-MainColor rounded-[8px] p-[2px]'>
-                                <span className='text-[25px] block'>Grammar</span>
-                                <span className='font-bold text-[25px] block'>{data.grammar_score}</span>
-                            </div>
-                            <div className='text-center border-[2px] border-MainColor rounded-[8px] p-[2px]'>
-                                <span className='text-[25px] block'>Vocabulary</span>
-                                <span className='font-bold text-[25px] block'>{data.vocabulary_score}</span>
-                            </div>
-                            <div className='text-center border-[2px] border-MainColor rounded-[8px] p-[2px]'>
-                                <span className='text-[25px] block'>Relevance</span>
-                                <span className='font-bold text-[25px] block'>{data.relevance_score}</span>
-                            </div>
-                            <div className='text-center border-[2px] border-MainColor rounded-[8px] p-[2px]'>
-                                <span className='text-[25px] block'>Topic Development</span>
-                                <span className='font-bold text-[25px] block'>{data.topic_dev_score}</span>
-                            </div>
-                        </div>
-                        <div className='mt-[20px]'>
-                            <h1 className='font-bold text-[25px] mb-[20px]'>Transcriptions:</h1>
-                            {renderTranscription(data.transcription)}
                         </div>
                     </div>
                 </div>

@@ -36,7 +36,6 @@ function Writing() {
         );
     }
 
-    // Если данных нет, вывести сообщение "Ничего нет"
     if (!data || data.length === 0) {
         return (
             <div className='flex items-center justify-center h-screen'>
@@ -46,95 +45,42 @@ function Writing() {
     }
 
     return (
-        <div className='Listening pt-[130px]'>
-            <div className='Container'>
-                <h1 className='font-bold text-[40px] text-center'>
-                    Your writing result
-                </h1>
-                <h2 className='text-center text-[25px]'>
-                    Your answer
-                </h2>
+        <div className='Writing flex-1 pt-32 pb-20 bg-gray-50'>
+            <div className='Container mx-auto max-w-2xl px-4'>
+                <h1 className='font-bold text-4xl text-center text-black'>Your Writing Result</h1>
+                <h2 className='text-center text-2xl text-black'>Your Answers</h2>
                 <div className=''>
-                    <div className='flex items-center justify-between gap-[10px] mt-[20px] mb-[20px]'>
+                    <div className='flex items-center justify-between gap-4 mt-8 mb-8'>
                         <button
-                            className={`w-full py-[5px] ${
-                                active === 1 ? 'bg-MainColor text-white' : 'bg-white'
-                            } border-[2px] border-MainColor rounded-[8px]`}
+                            className={`w-full py-3 text-lg font-semibold rounded-lg transition duration-300 ${active === 1 ? 'bg-white text-black border border-black' : 'bg-white text-black border border-black'} hover:bg-black hover:text-white`}
                             onClick={() => setActive(1)}
                         >
                             Task 1
                         </button>
                         <button
-                            className={`w-full py-[5px] ${
-                                active === 2 ? 'bg-MainColor text-white' : 'bg-white'
-                            } border-[2px] border-MainColor rounded-[8px]`}
+                            className={`w-full py-3 text-lg font-semibold rounded-lg transition duration-300 ${active === 2 ? 'bg-white text-black border border-black' : 'bg-white text-black border border-black'} hover:bg-black hover:text-white`}
                             onClick={() => setActive(2)}
                         >
                             Task 2
                         </button>
                     </div>
 
-                    {active === 1 && data[0] && (
-                        <div className='border-[2px] border-MainColor rounded-[8px] p-[20px] mb-[100px]'>
-                            <h1 className='text-[25px] font-bold'>Writing score: {data[0].taskBandScore}</h1>
-                            <div className='writing__wrapper flex items-center justify-between mt-[20px]'>
-                                <div className='text-center'>
-                                    <span className='text-[25px] block'>Coherence cohesion</span>
-                                    <span className='font-bold text-[25px] block'>{data[0].coherenceScore}</span>
-                                </div>
-                                <div className='text-center'>
-                                    <span className='text-[25px] block'>Grammar</span>
-                                    <span className='font-bold text-[25px] block'>{data[0].grammarScore}</span>
-                                </div>
-                                <div className='text-center'>
-                                    <span className='text-[25px] block'>Lexical resource</span>
-                                    <span className='font-bold text-[25px] block'>{data[0].lexicalResourceScore}</span>
-                                </div>
-                                <div className='text-center'>
-                                    <span className='text-[25px] block'>Task achievement</span>
-                                    <span className='font-bold text-[25px] block'>{data[0].taskAchievementScore}</span>
-                                </div>
+                    {data[active - 1] && (
+                        <div className='border-2 border-black rounded-lg p-5 mb-20 bg-white shadow-md'>
+                            <h1 className='text-2xl font-bold'>Writing Score: {data[active - 1].taskBandScore}</h1>
+                            <div className='writing__wrapper flex items-center justify-between mt-5'>
+                                <ScoreDetail title="Coherence Cohesion" score={data[active - 1].coherenceScore} />
+                                <ScoreDetail title="Grammar" score={data[active - 1].grammarScore} />
+                                <ScoreDetail title="Lexical Resource" score={data[active - 1].lexicalResourceScore} />
+                                <ScoreDetail title="Task Achievement" score={data[active - 1].taskAchievementScore} />
                             </div>
-                            <div className='mt-[20px]'>
-                                <h1 className='font-bold text-[25px] mb-[20px]'>Question:</h1>
-                                <img className='w-[500px]' src={foto} alt="" />
-                                <p>{data[0].question}</p>
-                                <h1 className='font-bold text-[25px] my-[12px]'>Answer:</h1>
-                                <p>{data[0].userAnswer}</p>
-                                <h1 className='font-bold text-[25px] my-[12px]'>Comment:</h1>
-                                <p>{data[0].feedback}</p>
-                            </div>
-                        </div>
-                    )}
-
-                    {active === 2 && data[1] && (
-                        <div className='border-[2px] border-MainColor rounded-[8px] p-[20px] mb-[100px]'>
-                            <h1 className='text-[25px] font-bold'>Writing score: {data[1].taskBandScore}</h1>
-                            <div className='writing__wrapper flex items-center justify-between mt-[20px]'>
-                                <div className='text-center'>
-                                    <span className='text-[25px] block'>Coherence cohesion</span>
-                                    <span className='font-bold text-[25px] block'>{data[1].coherenceScore}</span>
-                                </div>
-                                <div className='text-center'>
-                                    <span className='text-[25px] block'>Grammar</span>
-                                    <span className='font-bold text-[25px] block'>{data[1].grammarScore}</span>
-                                </div>
-                                <div className='text-center'>
-                                    <span className='text-[25px] block'>Lexical resource</span>
-                                    <span className='font-bold text-[25px] block'>{data[1].lexicalResourceScore}</span>
-                                </div>
-                                <div className='text-center'>
-                                    <span className='text-[25px] block'>Task achievement</span>
-                                    <span className='font-bold text-[25px] block'>{data[1].taskAchievementScore}</span>
-                                </div>
-                            </div>
-                            <div className='mt-[20px]'>
-                                <h1 className='font-bold text-[25px] mb-[20px]'>Question:</h1>
-                                <p>{data[1].question}</p>
-                                <h1 className='font-bold text-[25px] my-[12px]'>Answer:</h1>
-                                <p>{data[1].userAnswer}</p>
-                                <h1 className='font-bold text-[25px] my-[12px]'>Comment:</h1>
-                                <p>{data[1].feedback}</p>
+                            <div className='mt-5'>
+                                <QuestionAndAnswer
+                                    question={data[active - 1].question}
+                                    userAnswer={data[active - 1].userAnswer}
+                                    feedback={data[active - 1].feedback}
+                                    questionImage={active === 1 ? foto : null} // Change image based on task
+                                />
                             </div>
                         </div>
                     )}
@@ -143,5 +89,24 @@ function Writing() {
         </div>
     );
 }
+
+const ScoreDetail = ({ title, score }) => (
+    <div className='text-center p-4 border border-gray-300 rounded-lg bg-gray-100'>
+        <span className='text-lg block'>{title}</span>
+        <span className='font-bold text-2xl block'>{score}</span>
+    </div>
+);
+
+const QuestionAndAnswer = ({ question, userAnswer, feedback, questionImage }) => (
+    <>
+        <h1 className='font-bold text-xl mb-4'>Question:</h1>
+        {questionImage && <img className='w-96 mb-4' src={questionImage} alt="Question Illustration" />}
+        <p>{question}</p>
+        <h1 className='font-bold text-xl my-3'>Answer:</h1>
+        <p>{userAnswer}</p>
+        <h1 className='font-bold text-xl my-3'>Comment:</h1>
+        <p>{feedback}</p>
+    </>
+);
 
 export default Writing;
