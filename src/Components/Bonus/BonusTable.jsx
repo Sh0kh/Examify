@@ -1,36 +1,54 @@
-export default function BonusTable({ data }) {
-  return (
-    <div className="BonusTable mt-[50px] mb-[200px]">
-      <div className="Container">
-        <h1 className="text-center text-[40px] font-bold mb-[30px]">
-          Users joined via your referral link
-        </h1>
-        {data && data.length > 0 ?(
-        data?.map((i, index) => (
-          <div key={index} className='Result__Card w-full p-[20px] border-[2px] mb-[20px] border-MainColor rounded-[8px] flex items-center justify-between cursor-pointer transition duration-500 hover:shadow-2xl'>
-            <div className='flex items-end gap-[5px]'>
-              <span className='font-bold text-[15px] bg-MainColor text-[white] px-[8px] py-[3px] rounded-[50%]'>
-                {index + 1}
-              </span>
-              <span className='text-[20px] w-[50px]'>{i?.guestName}</span>
-            </div>
-            <span className='px-[20px] py-[10px] border-[2px] border-MainColor rounded-[8px] bg-MainColor text-[white] duration-300 hover:bg-transparent hover:text-MainColor'>
-              {i?.guestRegisteredAt.split('T')[0]}
-            </span>
-            <div>
-              <span className='text-[20px] font-bold block'>{i?.guestChatId}</span>
-            </div>
-          </div>
-        ))
-        ):(
-          <div className="text-center h-[400px]">
-            <h1>
-              Bonus yo'q
-            </h1>
-          </div>
-        )}
+import React from 'react';
 
-      </div>
-    </div>
-  )
+export default function BonusTable({ data }) {
+    const formatDate = (dateString) => {
+        const datePart = dateString.split(' ')[0];
+        const timePart = dateString.split(' ')[1];
+
+        const formattedString = `${datePart} ${timePart.split('.')[0]}`;
+
+        const date = new Date(formattedString);
+        return date.toISOString().slice(0, 19).replace('T', ' ');
+    };
+
+    return (
+        <div className="BonusTable mt-[50px] mb-[200px]">
+            <div className="Container">
+                <h1 className="text-center text-[40px] font-bold mb-[30px]">
+                    Users Joined via Your Referral Link
+                </h1>
+
+                {data && data.length > 0 ? (
+                    <table className="w-full border-collapse">
+                        <thead>
+                        <tr className="bg-MainColor text-white text-left">
+                            <th className="p-[15px] border-b border-white">#</th>
+                            <th className="p-[15px] border-b border-white">Guest Name</th>
+                            <th className="p-[15px] border-b border-white">Registered At</th>
+                            <th className="p-[15px] border-b border-white">Chat ID</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {data.map((i, index) => {
+                            const registeredAt = formatDate(i?.guestRegisteredAt);
+
+                            return (
+                                <tr key={index} className='Result__Card border-b border-gray-300 hover:bg-gray-100 transition duration-300'>
+                                    <td className='p-[15px] text-center'>{index + 1}</td>
+                                    <td className='p-[15px]'>{i?.guestName}</td>
+                                    <td className='p-[15px]'>{registeredAt}</td>
+                                    <td className='p-[15px] text-center'>{i?.guestChatId}</td>
+                                </tr>
+                            );
+                        })}
+                        </tbody>
+                    </table>
+                ) : (
+                    <div className="text-center h-[400px]">
+                        <h1 className='text-[20px] font-bold'>Bonus Yo'q</h1>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
 }

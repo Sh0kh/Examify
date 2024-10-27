@@ -1,5 +1,5 @@
 const CONFIG = {
-    API_URL: 'http://192.168.103.42:8080/api/ielts/exam/result/get-results-speaking-voice/',
+    API_URL: 'http://localhost:8080/api/ielts/exam/result/get-results-speaking-voice/',
   };
   
   export default CONFIG;

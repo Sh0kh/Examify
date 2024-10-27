@@ -7,32 +7,35 @@ import { fetchData } from '../Redux/MyInformation';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [values, setValues] = useState(Array(6).fill(''));
-    const [isSubmitted, setIsSubmitted] = useState(false); // Состояние для отслеживания отправки
-    const [active, setActive] = useState(false)
-    const dispatch = useDispatch()
-    const { data, status } = useSelector((state) => state.data)
-
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [active, setActive] = useState(false);
+    const [edit, setEdit] = useState({
+        name: '',
+        surname: '',
+        userId: ''
+    });
+    const dispatch = useDispatch();
+    const { data } = useSelector((state) => state.data);
+    const inputRefs = useRef([]);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            navigate('/'); // Перенаправляет на главную страницу, если токен существует
+            navigate('/');
         }
     }, [navigate]);
 
     useEffect(() => {
-        // Предположим, что data содержит информацию о пользователе после получения данных
         if (data) {
             setEdit({
                 name: data.name || '',
                 surname: data.surname || '',
+                userId: data.userId || ''
             });
         }
     }, [data]);
-
-    const inputRefs = useRef([]);
 
     const handleChange = (e, index) => {
         const inputValue = e.target.value;
@@ -51,22 +54,19 @@ function Login() {
             }
         }
     };
+
     const handlePaste = (e, index) => {
-        e.preventDefault(); // Предотвратить стандартное поведение вставки
-    
-        const pasteData = e.clipboardData.getData('text').split('').slice(0, 6); // Получить вставляемые символы и ограничить до 6
+        e.preventDefault();
+        const pasteData = e.clipboardData.getData('text').split('').slice(0, 6);
         const newValues = [...values];
-    
-        // Заполнить значения инпутов
+
         for (let i = 0; i < pasteData.length; i++) {
             if (index + i < newValues.length) {
-                newValues[index + i] = pasteData[i].match(/^[0-9]$/) ? pasteData[i] : ''; // Убедиться, что это цифра
+                newValues[index + i] = pasteData[i].match(/^[0-9]$/) ? pasteData[i] : '';
             }
         }
-    
+
         setValues(newValues);
-    
-        // Установить фокус на следующий доступный инпут
         inputRefs.current[Math.min(index + pasteData.length, 5)].focus();
     };
 
@@ -84,8 +84,8 @@ function Login() {
                 const code = values.join('');
                 const response = await axios.post(`/auth/login/${code}`);
                 showSuccessToast();
-                localStorage.setItem('token', response.data.message)
-                setActive(true)
+                localStorage.setItem('token', response.data.message);
+                setActive(true);
                 dispatch(fetchData());
             } catch (error) {
                 showErrorToast(error.response?.data?.message || 'Xato!');
@@ -98,20 +98,10 @@ function Login() {
         } else if (values.some(value => value === '')) {
             setIsSubmitted(false);
         }
-    }, [values, isSubmitted, status, data, dispatch]);
+    }, [values, isSubmitted, dispatch]);
 
-
-
-
-
-    const [edit, setEdit] = useState({
-        name: '',
-        surname: '',
-        userId: ''
-    })
     const EditMyInformation = async (e) => {
         e.preventDefault();
-
         try {
             const EditData = {
                 name: edit.name,
@@ -122,13 +112,11 @@ function Login() {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
             });
-            window.location.reload()
-            showTrue()
-            setActive(false)
-            navigate('/')
+            showTrue();
+            setActive(false);
+            navigate('/');
         } catch (error) {
-            console.log(error);
-            showErrorToast(error?.response?.data?.message || 'Xato!')
+            showErrorToast(error?.response?.data?.message || 'Xato!');
         }
     };
 
@@ -140,7 +128,6 @@ function Login() {
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
-            progress: undefined,
             style: {
                 backgroundColor: '#1B2A3D',
                 color: 'white'
@@ -156,7 +143,6 @@ function Login() {
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
-            progress: undefined,
             style: {
                 backgroundColor: '#1B2A3D',
                 color: 'white'
@@ -172,7 +158,6 @@ function Login() {
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
-            progress: undefined,
             style: {
                 backgroundColor: '#1B2A3D',
                 color: 'white'
@@ -181,82 +166,80 @@ function Login() {
     };
 
     const skip = () => {
-        setActive(false)
-        window.location.reload()
-    }
+        setActive(false);
+        navigate('/');
+    };
 
     return (
-        <div className="Login w-full h-screen pt-[200px] relative flex items-baseline justify-center overflow-hidden">
-            <div className="Login__wrapper text-center">
-                <h1 className="font-bold text-MainColor text-[45px]">
-                    Kodni kiriting
-                </h1>
-                <p className="text-[30px] text-MainColor">
-                    <a
-                        className="text-MainColor border-b-[3px] border-MainColor"
-                        href="https://t.me/codevanbot"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
+        <div className="Login w-full h-screen flex items-center justify-center bg-white relative">
+            <div className="Login__wrapper text-center bg-white rounded-lg shadow-lg p-10">
+                <h1 className="font-bold text-3xl text-gray-800 mb-4">Kodni kiriting</h1>
+                <p className="text-lg text-gray-600 mb-6">
+                    <a className="text-blue-500 border-b-2 border-blue-500" href="https://t.me/codevanbot" target="_blank" rel="noopener noreferrer">
                         codevan bot
-                    </a>{' '}
-                    yordamida kodingizni oling
+                    </a> yordamida kodingizni oling
                 </p>
 
-                <form className="flex items-center justify-center gap-[20px] mt-[60px]">
+                <form className="flex items-center justify-center gap-2 mb-6">
                     {values.map((value, index) => (
                         <input
                             key={index}
                             ref={(el) => (inputRefs.current[index] = el)}
                             value={value}
                             onChange={(e) => handleChange(e, index)}
-                            onPaste={(e) => handlePaste(e, index)} // Добавляем обработчик вставки
+                            onPaste={(e) => handlePaste(e, index)}
                             onKeyDown={(e) => handleKeyDown(e, index)}
                             type="text"
-                            className="py-[10px] text-center text-[25px] border-[2px] border-MainColor px-[10px] w-[50px] rounded-[16px] "
+                            className="py-2 text-center text-2xl border border-gray-300 rounded-lg w-12 transition duration-300 focus:outline-none focus:border-blue-500"
                             pattern="[0-9]*"
                             maxLength="1"
                             inputMode="numeric"
                         />
                     ))}
                 </form>
-            </div>
-            <div className={`fixed inset-0 top-[-100px] z-50 ${active ? 'block' : 'hidden'}`}>
 
-            </div>
-            <div className={`LoginModal bg-MainColor p-[20px] z-50 absolute rounded-[10px] w-[35%] h-[300px] transition-opacity duration-500 transform ${active ? 'opacity-100 scale-100' : 'opacity-0 scale-75 pointer-events-none'}`}>
-                <h2 className='text-[white] text-center text-[30px]'>
-                    Edit name
-                </h2>
-                <form className='flex items-center gap-[20px] flex-col' onSubmit={EditMyInformation}>
-                    <label htmlFor="name" className='w-full'>
-                        <h3 className='text-[white]'>
-                            Name:
-                        </h3>
-                        <input id='name'
-                            value={edit.name}
-                            onChange={(e) => setEdit({ ...edit, name: e.target.value })}
-                            className='w-full px-[10px] py-[5px] rounded-[8px] bg-transparent outline-none border-[2px] border-[white] text-white' type="text" />
-                    </label>
-                    <label htmlFor="SurName" className='w-full block'>
-                        <h3 className='text-[white]'>
-                            Surname:
-                        </h3>
-                        <input
-                            value={edit.surname}
-                            onChange={(e) => setEdit({ ...edit, surname: e.target.value })}
-                            id='SurName' className='w-full px-[10px] py-[5px] rounded-[8px] bg-transparent outline-none border-[2px] border-[white] text-white' type="text" />
-                    </label>
-                    <div className='flex items-center justify-between w-full'>
-                        <button type='submit' className='bg-[white] px-[20px] py-[5px] rounded-[8px] text-[20px] border-[2px] transition duration-500 border-[white]  hover:text-[white] hover:bg-transparent '>
-                            Edit
-                        </button>
-                        <span onClick={skip} className='flex items-center gap-[10px] text-white cursor-pointer'>
-                            Skip
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="m20 12l.354-.354l.353.354l-.353.354zm-15 .5a.5.5 0 0 1 0-1zm9.354-6.854l6 6l-.708.708l-6-6zm6 6.708l-6 6l-.708-.708l6-6zM20 12.5H5v-1h15z"></path></svg>
-                        </span>
-                    </div>
-                </form>
+                {/* Modal for Editing Information */}
+                {active && (
+                    <>
+                        <div className="fixed inset-0 bg-black opacity-50 z-40"></div>
+                        <div className="LoginModal bg-white p-6 rounded-lg w-80 h-auto transition-opacity duration-500 transform z-50 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                            <h2 className='text-black text-center text-2xl mb-4'>Edit Name</h2>
+                            <form className='flex flex-col gap-4' onSubmit={EditMyInformation}>
+                                <label htmlFor="name" className='flex flex-col'>
+                                    <span className='text-black'>Name:</span>
+                                    <input
+                                        id='name'
+                                        value={edit.name}
+                                        onChange={(e) => setEdit({ ...edit, name: e.target.value })}
+                                        className='w-full px-3 py-2 rounded-lg bg-transparent border-2 border-gray-300 text-black focus:outline-none'
+                                        type="text"
+                                        required
+                                    />
+                                </label>
+                                <label htmlFor="SurName" className='flex flex-col'>
+                                    <span className='text-black'>Surname:</span>
+                                    <input
+                                        id='SurName'
+                                        value={edit.surname}
+                                        onChange={(e) => setEdit({ ...edit, surname: e.target.value })}
+                                        className='w-full px-3 py-2 rounded-lg bg-transparent border-2 border-gray-300 text-black focus:outline-none'
+                                        type="text"
+                                        required
+                                    />
+                                </label>
+                                <div className='flex items-center justify-between mt-4'>
+                                    <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded-lg transition duration-300 shadow-md hover:bg-blue-600'>
+                                        Edit
+                                    </button>
+                                    <span onClick={skip} className='text-blue-500 cursor-pointer hover:underline'>
+                        Skip
+                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </>
+                )}
+
             </div>
             <ToastContainer />
         </div>

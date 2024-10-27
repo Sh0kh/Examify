@@ -86,7 +86,7 @@ export default function Listening() {
                     </td>
                     <td className='py-[8px]'>
                       <h3 className='text-[20px] text-center'>
-                        {item.userAnswer || 'Not Answer'}
+                        {item.userAnswer || 'No Answer'}
                       </h3>
                     </td>
                     <td className='py-[8px]'>
