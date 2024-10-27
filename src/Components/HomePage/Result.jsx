@@ -82,10 +82,10 @@ function Result() {
         <section className='Result pb-[50px] mt-[80px]'>
             <div className='Container'>
                 <h1 className='Result__title text-MainColor text-center font-bold text-[55px] cursor-pointer transition-all duration-700 hover:tracking-widest'>
-                    Bizning peshqadamlar
+                    Our Leaders
                 </h1>
                 <p className='Result__title2 text-[20px] text-MainColor text-center'>
-                    Oxirgi 3 oydagi eng yaxshi natijalar
+                    Best results of the last 3 months
                 </p>
                 <div className='Result__wrapper relative flex items-center flex-col gap-[10px] w-[1000px] mt-[20px] mx-auto'>
                     {loading ? (
