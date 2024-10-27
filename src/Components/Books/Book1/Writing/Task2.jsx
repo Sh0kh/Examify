@@ -6,7 +6,7 @@ function Task2({setAnswer, answer}) {
         <div className='Task2 px-[20px]  mt-[20px]'>
             <div className='p-[20px] border-[2px] border-black w-[100%]'>
                 <h2 className='font-bold text-[25px]'>
-                    Task 1
+                    Task 2
                 </h2>
                 <p>
                     Some people think technology development decreases crime, while others believe it actually
