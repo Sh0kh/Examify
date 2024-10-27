@@ -7,8 +7,9 @@ import { setComponent } from '../../../../Redux/ComponentSlice';
 import { useNavigate } from 'react-router-dom';
 
 function Speaking() {
-    const navigate = useNavigate()
-    const [active, setActive] = useState(1); // State to track the active part
+    const navigate = useNavigate();
+    const [active, setActive] = useState(1); // Part 1 is active by default
+    const [visitedParts, setVisitedParts] = useState([1]); // Part 1 marked as visited by default
     const dispatch = useDispatch();
 
     const out = () => {
@@ -20,6 +21,13 @@ function Speaking() {
 
     const handleNext = () => {
         dispatch(setComponent('WRITING'));
+    };
+
+    const handlePartClick = (part) => {
+        if (!visitedParts.includes(part)) { // Only allow if part not already visited
+            setActive(part);
+            setVisitedParts([...visitedParts, part]); // Add part to visited parts
+        }
     };
 
     return (
@@ -41,15 +49,18 @@ function Speaking() {
             </div>
             <div>
                 {/* Part navigation buttons */}
-                <div className='mx-auto w-[1300px]  flex items-center gap-[3px] mt-[5px]'>
-                    {[1, 2, 3].map(part => (
-                        <button
-                            key={part}
-                            onClick={() => setActive(part)} // Update active part on click
-                            className={`border-[1px] border-[#D6D4D4] px-[10px] py-[7px] font-bold bg-[#ababab83] ${active === part ? 'bg-transparent' : ''}`}>
-                            Part {part}
-                        </button>
-                    ))}
+                <div className='Container'>
+                    <div className='mx-auto flex items-center gap-[3px] mt-[5px]'>
+                        {[1, 2, 3].map(part => (
+                            <button
+                                key={part}
+                                onClick={() => handlePartClick(part)} // Update active part on click
+                                disabled={part === 1 || visitedParts.includes(part)} // Disable Part 1 and visited parts
+                                className={`border-[1px] border-[#D6D4D4] px-[10px] py-[7px] font-bold bg-[#ababab83] ${active === part ? 'bg-transparent' : ''} ${visitedParts.includes(part) || part === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                                Part {part}
+                            </button>
+                        ))}
+                    </div>
                 </div>
                 {/* Render the active part component */}
                 <div>

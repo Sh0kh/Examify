@@ -2,7 +2,7 @@ import React from 'react'
 
 function Part2({ updateAnswers, answers }) {
     return (
-        <div className='overflow-hidden flex gap-[20px] border-t-[2px] pt-[10px]'>
+        <div className='Readin__wrapper overflow-hidden flex gap-[20px] border-t-[2px] pt-[10px]'>
             <div className='overflow-y-scroll h-screen  w-[50%] px-[15px] pb-[150px]'>
                 <strong className='my-[15px] block'>
                     Evolution of Currency
@@ -50,7 +50,10 @@ function Part2({ updateAnswers, answers }) {
                     The evolution of currency reflects the dynamic interplay between technological innovation, economic development, and societal norms. While digital advancements have transformed the landscape of financial transactions, cash remains an essential and resilient component of the global economy. Its tangible attributes, cultural significance, and role in promoting financial inclusion underscore its enduring relevance in modern society. As we navigate the complexities of the digital age, it is imperative to recognize the multifaceted nature of currency and strive for a balanced approach that preserves the accessibility, security, and cultural significance of cash alongside digital innovations.
                 </p>
             </div>
-            <div className='overflow-y-scroll h-screen   w-[50%] px-[15px] pb-[150px]'>
+            <div className='ReadingLine w-full bg-MainColor h-[5px] my-[10px] hidden'>
+
+            </div>
+            <div className='Readin__wrapper overflow-y-scroll h-screen   w-[50%] px-[15px] pb-[150px]'>
                 <strong className='my-[20px] block text-[22px]'>
                     Questions 14-20
                 </strong>
@@ -98,6 +101,7 @@ function Part2({ updateAnswers, answers }) {
                         <option defaultValue>Select</option>
                         <option value="i">i</option>
                         <option value="ii">ii</option>
+                        <option value="iii">iii</option>
                         <option value="iv">iv</option>
                         <option value="v">v</option>
                         <option value="vi">vi</option>
@@ -115,6 +119,7 @@ function Part2({ updateAnswers, answers }) {
                         <option defaultValue>Select</option>
                         <option value="i">i</option>
                         <option value="ii">ii</option>
+                        <option value="iii">iii</option>
                         <option value="iv">iv</option>
                         <option value="v">v</option>
                         <option value="vi">vi</option>
@@ -132,6 +137,7 @@ function Part2({ updateAnswers, answers }) {
                         <option defaultValue>Select</option>
                         <option value="i">i</option>
                         <option value="ii">ii</option>
+                        <option value="iii">iii</option>
                         <option value="iv">iv</option>
                         <option value="v">v</option>
                         <option value="vi">vi</option>
@@ -149,6 +155,7 @@ function Part2({ updateAnswers, answers }) {
                         <option defaultValue>Select</option>
                         <option value="i">i</option>
                         <option value="ii">ii</option>
+                        <option value="iii">iii</option>
                         <option value="iv">iv</option>
                         <option value="v">v</option>
                         <option value="vi">vi</option>
@@ -166,6 +173,7 @@ function Part2({ updateAnswers, answers }) {
                         <option defaultValue>Select</option>
                         <option value="i">i</option>
                         <option value="ii">ii</option>
+                        <option value="iii">iii</option>
                         <option value="iv">iv</option>
                         <option value="v">v</option>
                         <option value="vi">vi</option>
@@ -183,6 +191,7 @@ function Part2({ updateAnswers, answers }) {
                         <option defaultValue>Select</option>
                         <option value="i">i</option>
                         <option value="ii">ii</option>
+                        <option value="iii">iii</option>
                         <option value="iv">iv</option>
                         <option value="v">v</option>
                         <option value="vi">vi</option>
@@ -200,6 +209,7 @@ function Part2({ updateAnswers, answers }) {
                         <option defaultValue>Select</option>
                         <option value="i">i</option>
                         <option value="ii">ii</option>
+                        <option value="iii">iii</option>
                         <option value="iv">iv</option>
                         <option value="v">v</option>
                         <option value="vi">vi</option>

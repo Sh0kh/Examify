@@ -108,7 +108,7 @@ function FAQ() {
             delay: 0.2,
             scrollTrigger: {
               trigger: '.FAQ__title',
-              start: 'top 90%',
+              start: 'top 150%',
             },
           }
         );
@@ -122,7 +122,7 @@ function FAQ() {
             delay: 0.5,
             scrollTrigger: {
               trigger: '.HFAQ__wrapper',
-              start: 'top 95%',
+              start: 'top 150%',
             },
           }
         );

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import BonusTable from "../Components/Bonus/BonusTable";
 import UserBonus from "../Components/Bonus/UserBonus";
 import axios from "axios";
+import Footer from "../Components/Footer/Footer";
 
 export default function Bonus(){
     const [data, setData] = useState()
@@ -23,9 +24,10 @@ export default function Bonus(){
 
     console.log(data)
     return(
-        <div className="py-[100px]">
+        <div className="pt-[100px]">
             <UserBonus data={data}/>
             <BonusTable data={data?.more}/>
+            <Footer/>
         </div>
     )
 }

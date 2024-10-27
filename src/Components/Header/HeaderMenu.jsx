@@ -55,13 +55,18 @@ function HeaderMenu({ isOpen, onClose }) {
                         Home
                     </NavLink>
                     <NavLink onClick={ScrollandClose} to={`/test`} className="text-white font-bold text-[20px] transition-all duration-500 hover:tracking-[8px]">
-                        TEST
+                        Take exam
                     </NavLink>
-                    {/* <NavLink onClick={ScrollandClose} to={`/faq`} className="text-white font-bold text-[20px] transition-all duration-500 hover:tracking-widest">
-                        FAQ
-                    </NavLink> */}
+                    {token && (
+                        <NavLink onClick={ScrollandClose} to={`/myResult`} className="font-bold text-[white] text-[20px] transition-all duration-500 hover:tracking-[10px]">
+                            My Result
+                        </NavLink>
+                    )}
                     <NavLink onClick={ScrollandClose} to={`/contact`} className="text-white font-bold text-[20px] transition-all duration-500 hover:tracking-widest">
                         Contact
+                    </NavLink>
+                    <NavLink onClick={ScrollandClose} to={`/bonus`} className="font-bold text-[white] text-[20px] transition-all duration-500 hover:tracking-widest">
+                        Bonus
                     </NavLink>
                     {token ? (
                         <button onClick={exit} className='flex items-center gap-[5px] font-bold text-[20px] text-MainColor border-[3px] border-white pl-[10px] pr-[25px] py-[5px] transition-colors duration-[0.6s] rounded-[8px] bg-white hover:bg-transparent hover:text-white'>

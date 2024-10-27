@@ -2,7 +2,7 @@ import React from 'react'
 
 function Part3({ updateAnswers, answers }) {
     return (
-        <div className='overflow-hidden flex gap-[20px] border-t-[2px] pt-[10px]'>
+        <div className='Readin__wrapper overflow-hidden flex gap-[20px] border-t-[2px] pt-[10px]'>
             <div className='overflow-y-scroll h-screen   w-[50%] px-[15px] pb-[150px]'>
                 <strong className='my-[15px] block'>
                     Exploring the Depths: The Impact of Deep-Sea Mining on Marine Ecosystems
@@ -68,6 +68,9 @@ function Part3({ updateAnswers, answers }) {
                     As the world stands on the brink of a new era of ocean exploration and exploitation, the decisions made today will shape the future of our planet's oceans. The debate over deep-sea mining encapsulates broader questions about how humanity balances the pursuit of resources with the imperative to preserve natural ecosystems. Whether deep-sea mining becomes a symbol of human ingenuity and a pillar of sustainable development or a cautionary tale of environmental degradation will depend on the actions of governments, businesses, scientists, and civil society in the coming years.
                 </p>
             </div>
+            <div className='ReadingLine w-full bg-MainColor h-[5px] my-[10px] hidden'>
+
+</div>
             <div className='overflow-y-scroll h-screen w-[50%] pb-[150px]'>
                 <strong className='my-[20px] block text-[22px]'>
                     Questions 27-31

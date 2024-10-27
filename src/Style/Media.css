@@ -152,6 +152,27 @@
     .recom{
         display: block;
     }
+
+    .Readin__wrapper{
+        flex-direction: column;
+        gap: 20px;
+    }
+    .Readin__wrapper div{
+        width: 100%;
+    }
+    .ReadingLine{
+        display: block !important;
+    }
+    .Task1{
+        flex-direction: column;
+        gap: 10px;
+    }
+    .Task1 div{
+        width: 100%;
+    }
+    .Task1 textarea{
+        height: 500px;
+    }
 }
 @media(max-width:600px){
     .Service__wrapper{

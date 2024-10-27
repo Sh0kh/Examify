@@ -71,6 +71,7 @@ function Listening() {
     const handleNext = () => {
         SendUserAnswer();
         audio.pause();
+
     };
 
     const SendUserAnswer = async () =>{
