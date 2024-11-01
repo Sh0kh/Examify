@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'; // Import useDispatch
 import 'react-toastify/dist/ReactToastify.css';
 import { setComponent } from '../../Redux/ComponentSlice'; // Import the setComponent action
 
-function TestModal({ isOpen, onClose }) {
+function TestModal({ isOpen, onClose, id }) {
     const navigate = useNavigate();
     const dispatch = useDispatch(); // Initialize dispatch
 
@@ -16,7 +16,7 @@ function TestModal({ isOpen, onClose }) {
                 '/ielts/exam/create',
                 null,
                 {
-                    params: { bookId: 1 },
+                    params: { bookId: id },
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -25,7 +25,7 @@ function TestModal({ isOpen, onClose }) {
             const examID = response.data.message;
             // Dispatch action to set the current component to 'LISTENING'
             dispatch(setComponent('LISTENING'));
-            navigate(`/book1/${examID}`);
+            navigate(`/book${id}/${examID}`);
             showSuccessToast();
 
         } catch (error) {

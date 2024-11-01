@@ -13,15 +13,15 @@ function Top3({data}) {
                             </div>
                         </div>
                         <h2 className='text-[white] text-center mt-[10px] text-[20px]'>
-                            {data[2].user?.name}
+                            {data[2]?.user?.name}
                         </h2>
                         <div className='w-[70%] h-[2px] mx-auto my-[10px] bg-[white] rounded-[10px]'>
                         </div>
                         <span className='text-[white] block'>
-                            {data[2].createdAt.split('T')[0]}
+                            {data[2]?.createdAt?.split('T')[0]}
                         </span>
                         <h2 className='text-MainColor py-[5px] px-[5px] bg-white w-[65px] mt-[10px] mx-auto text-[30px] rounded-[50%]'>
-                            {data[2].overall}
+                            {data[2]?.overall}
                         </h2>
                     </div>
                     <div className='Top3__card1 text-center bg-MainColor px-[20px] cursor-pointer border-MainColor border-[2px] shadow-xl w-[400px] py-[60px] rounded-[8px]'>
@@ -40,7 +40,7 @@ function Top3({data}) {
                             {data[0]?.createdAt.split('T')[0]}
                         </span>
                         <h2 className='text-MainColor py-[5px] px-[5px] bg-white w-[65px] mt-[10px] mx-auto text-[30px] rounded-[50%]'>
-                            {data[0].overall}
+                            {data[0]?.overall}
                         </h2>
                     </div>
                     <div className='Top3__card text-center bg-MainColor px-[20px] cursor-pointer border-MainColor border-[2px] shadow-xl w-[300px] py-[20px] rounded-[8px]'>
@@ -51,15 +51,15 @@ function Top3({data}) {
                             </div>
                         </div>
                         <h2 className='text-[white] text-center mt-[10px] text-[20px]'>
-                            {data[1].user?.name}
+                            {data[1]?.user?.name}
                         </h2>
                         <div className='w-[70%] h-[2px] mx-auto my-[10px] bg-[white] rounded-[10px]'>
                         </div>
                         <span className='text-[white] block'>
-                            {data[1].createdAt.split('T')[0]}
+                            {data[1]?.createdAt.split('T')[0]}
                         </span>
                         <h2 className='text-MainColor py-[5px] px-[5px] bg-white w-[65px] mt-[10px] mx-auto text-[30px] rounded-[50%]'>
-                            {data[1].overall}
+                            {data[1]?.overall}
                         </h2>
                     </div>
                 </div>
@@ -72,15 +72,15 @@ function Top3({data}) {
                             </div>
                         </div>
                         <h2 className='text-[white] text-center mt-[10px] text-[25px]'>
-                            {data[0].user?.name}
+                            {data[0]?.user?.name}
                         </h2>
                         <div className='w-[70%] h-[2px] mx-auto my-[10px] bg-[white] rounded-[10px]'>
                         </div>
                         <span className='text-[white] text-[20px] block'>
-                            {data[0].createdAt.split('T')[0]}
+                            {data[0]?.createdAt?.split('T')[0]}
                         </span>
                         <h2 className='text-MainColor py-[5px] px-[5px] bg-white w-[65px] mt-[10px] mx-auto text-[30px] rounded-[50%]'>
-                            {data[0].overall}
+                            {data[0]?.overall}
                         </h2>
                     </div>
                     <div className='Top3__card text-center bg-MainColor px-[20px] cursor-pointer border-MainColor border-[2px] shadow-xl w-[300px] py-[20px] rounded-[8px]'>
@@ -91,15 +91,15 @@ function Top3({data}) {
                             </div>
                         </div>
                         <h2 className='text-[white] text-center mt-[10px] text-[20px]'>
-                            {data[1].user?.name}
+                            {data[1]?.user?.name}
                         </h2>
                         <div className='w-[70%] h-[2px] mx-auto my-[10px] bg-[white] rounded-[10px]'>
                         </div>
                         <span className='text-[white] block'>
-                            {data[1].createdAt.split('T')[0]}
+                            {data[1]?.createdAt?.split('T')[0]}
                         </span>
                         <h2 className='text-MainColor py-[5px] px-[5px] bg-white w-[65px] mt-[10px] mx-auto text-[30px] rounded-[50%]'>
-                            {data[1].overall}
+                            {data[1]?.overall}
                         </h2>
                     </div>
                     <div className='Top3__card text-center bg-MainColor px-[20px] cursor-pointer border-MainColor border-[2px] shadow-xl w-[300px] py-[20px] rounded-[8px]'>
@@ -110,15 +110,15 @@ function Top3({data}) {
                             </div>
                         </div>
                         <h2 className='text-[white] text-center mt-[10px] text-[20px]'>
-                            {data[2].user?.name}
+                            {data[2]?.user?.name}
                         </h2>
                         <div className='w-[70%] h-[2px] mx-auto my-[10px] bg-[white] rounded-[10px]'>
                         </div>
                         <span className='text-[white] block'>
-                            {data[2].createdAt.split('T')[0]}
+                            {data[2]?.createdAt?.split('T')[0]}
                         </span>
                         <h2 className='text-MainColor py-[5px] px-[5px] bg-white w-[65px] mt-[10px] mx-auto text-[30px] rounded-[50%]'>
-                            {data[2].overall}
+                            {data[2]?.overall}
                         </h2>
                     </div>
                 </div>

@@ -9,12 +9,12 @@ function TestItem() {
     const [notification, setNotification] = useState(null);
     const ActiveModal = () => setActive(true);
     const CloseModal = () => setActive(false);
-
+    const [bookID, setBookID] = useState(null)
     const tests = [
-        { id: 'TEST 1', available: true },
-        { id: 'TEST 2', available: false },
-        { id: 'TEST 3', available: false },
-        { id: 'TEST 4', available: false },
+        { name: 'TEST 1', available: true, id: 1 },
+        { name: 'TEST 2', available: true, id: 2 },
+        { name: 'TEST 3', available: false, id: 3 },
+        { name: 'TEST 4', available: false, id: 4 },
     ];
 
     const handleTestClick = (available) => {
@@ -35,7 +35,7 @@ function TestItem() {
                 </h1>
                 <div className='Test__wrapper'>
                     {tests.map((test, index) => (
-                        <div key={index} className='flex flex-col items-center'>
+                        <div onClick={()=>setBookID(test.id)} key={index} className='flex flex-col items-center'>
                             <div
                                 onClick={() => handleTestClick(test.available)}
                                 className='Test__card flex flex-col h-[400px] cursor-pointer p-[20px] bg-MainColor rounded-[8px] transition duration-500 hover:shadow-xl'>
@@ -45,7 +45,7 @@ function TestItem() {
                                 </h2>
                                 <span
                                     className={`opacity-[0.5] text-[white] text-[30px] ${test.available ? 'text-green-500' : 'text-red-500'}`}>
-                                    {test.id}
+                                    {test.name}
                                 </span>
                                 <img className='TestCard1 block mt-[30px]' src={Bg} alt="foto" />
                             </div>
@@ -65,7 +65,7 @@ function TestItem() {
                     </div>
                 )}
             </div>
-            <TestModal isOpen={active} onClose={CloseModal} />
+            <TestModal isOpen={active} onClose={CloseModal} id={bookID}/>
         </section>
     );
 }

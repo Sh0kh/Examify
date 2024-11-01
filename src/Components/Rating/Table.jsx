@@ -70,7 +70,7 @@ function Table({ data }) {
                                         </div>
                                         <div>
                                             <span>
-                                                {i.bookName}
+                                                {i?.bookName}
                                             </span>
                                         </div>
                                         <div>
@@ -78,12 +78,12 @@ function Table({ data }) {
                                                 {i.createdAt.split('T')[0]}
                                             </span>
                                             <span className='block text-center text-[11px]'>
-                                                {i.createdAt.slice(11, 16)}
+                                                {i?.createdAt.slice(11, 16)}
                                             </span>
                                         </div>
                                         <div>
                                             <span>
-                                                {i.overall}
+                                                {i?.overall}
                                             </span>
                                         </div>
                                     </div>
@@ -91,16 +91,16 @@ function Table({ data }) {
                                 <AccordionDetails>
                                     <div className='flex gap-[10px] flex-col'>
                                         <h3>
-                                            Listening: {i.listening === 'N/A' ? 'Part not started'  : i.listening  }
+                                            Listening: {i?.listening === 'N/A' ? 'Part not started'  : i?.listening  }
                                         </h3>
                                         <h3>
-                                            Reading: {i.reading === 'N/A' ? 'Part not started' : i.reading}
+                                            Reading: {i?.reading === 'N/A' ? 'Part not started' : i?.reading}
                                         </h3>
                                         <h3>
-                                            Writing: {i.writing === 'N/A' ? 'Part not started' : i.writing}
+                                            Writing: {i?.writing === 'N/A' ? 'Part not started' : i?.writing}
                                         </h3>
                                         <h3>
-                                            Speaking:{i.speaking === 'N/A' ?  'Part not started' : i.speaking} 
+                                            Speaking:{i?.speaking === 'N/A' ?  'Part not started' : i?.speaking} 
                                         </h3>
                                     </div>
                                 </AccordionDetails>

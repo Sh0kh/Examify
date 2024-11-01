@@ -19,6 +19,7 @@ import Writing from './Components/Result/Writing';
 import Speaking from './Components/Result/Speaking';
 import PrivateRoute from './Components/PrivateRoute'; // Import PrivateRoute
 import Bonus from './Pages/Bonus';
+import Book2 from './Components/Books/Book2/Book2';
 
 function App() {
   return (
@@ -26,51 +27,52 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<AppLayout />}>
-          <Route path='/contact' element={<Contact />} />
+            <Route path='/contact' element={<Contact />} />
             <Route element={<WebLayout />}>
               <Route index element={<Home />} />
               <Route path='/login' element={<Login />} />
               <Route path='/test' element={<Test />} />
               <Route path='/faq' element={<FAQ />} />
               <Route path='/rating' element={<Rating />} />
-              <Route path='/bonus' element={<PrivateRoute element={<Bonus/>}/>}/>
-              <Route 
-              path='/myResult' 
-              element={
-                <PrivateRoute element={<MyResult />}/>
-              } 
-            />
-            <Route 
-              path='/listening/:ID' 
-              element={
-                <PrivateRoute element={<Listening />} />} 
-            />
-            <Route 
-              path='/reading/:ID' 
-              element={
-                <PrivateRoute element={<Reading />}/>} 
-            />
-            <Route 
-              path='/writing/:ID' 
-              element={
-                <PrivateRoute element={<Writing />}/>} 
-            />
-            <Route 
-              path='/speaking/:ID' 
-              element={
-                <PrivateRoute element={<Speaking />}/>
-              } 
-            />
-        
-            {/* Routes with individual authentication checks */}
-          
-          </Route>
-          <Route 
-              path='/book1/:ID' 
-              element={
-                <PrivateRoute element={<Book1 />}/>} 
-            />
+              <Route path='/bonus' element={<PrivateRoute element={<Bonus />} />} />
+              <Route
+                path='/myResult'
+                element={
+                  <PrivateRoute element={<MyResult />} />
+                }
+              />
+              <Route
+                path='/listening/:ID'
+                element={
+                  <PrivateRoute element={<Listening />} />}
+              />
+              <Route
+                path='/reading/:ID'
+                element={
+                  <PrivateRoute element={<Reading />} />}
+              />
+              <Route
+                path='/writing/:ID'
+                element={
+                  <PrivateRoute element={<Writing />} />}
+              />
+              <Route
+                path='/speaking/:ID'
+                element={
+                  <PrivateRoute element={<Speaking />} />
+                }
+              />
+
+              {/* Routes with individual authentication checks */}
+
             </Route>
+            <Route
+              path='/book1/:ID'
+              element={
+                <PrivateRoute element={<Book1 />} />}
+            />
+          </Route>
+          <Route path='/book2/:ID' element={<PrivateRoute element={<Book2 />} />} />
 
         </Routes>
       </Router>
