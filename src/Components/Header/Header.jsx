@@ -81,8 +81,8 @@ function Header() {
               </NavLink>
             </nav>
             <div className='flex items-center gap-[5px] relative'>
-              <a href="https://itliveacademy.uz/" target="_blank" rel="noopener noreferrer" className='header__login__btn flex items-center gap-[5px] font-bold text-[20px] text-[white] border-[3px] border-MainColor px-[25px] py-[5px] transition-colors duration-[0.6s] rounded-[8px] bg-MainColor hover:bg-transparent hover:text-MainColor'>
-                IT Live
+              <a href="https://itliveacademy.uz/" target="_blank" rel="noopener noreferrer" className='header__login__btn flex items-center gap-[5px] font-bold text-[20px] text-MainColor border-[3px] border-MainColor px-[25px] py-[5px] transition-colors duration-[0.6s] rounded-[8px] bg-transparent hover:bg-MainColor hover:text-[white]'>
+                IT LIVE ACADEMY
               </a>
               {token ? (
                 <button className='header__login__btn' onClick={ActiveModal}>
