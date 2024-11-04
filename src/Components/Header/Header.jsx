@@ -81,6 +81,9 @@ function Header() {
               </NavLink>
             </nav>
             <div className='flex items-center gap-[5px] relative'>
+              <a href="https://itliveacademy.uz/" target="_blank" rel="noopener noreferrer" className='header__login__btn flex items-center gap-[5px] font-bold text-[20px] text-[white] border-[3px] border-MainColor px-[25px] py-[5px] transition-colors duration-[0.6s] rounded-[8px] bg-MainColor hover:bg-transparent hover:text-MainColor'>
+                IT Live
+              </a>
               {token ? (
                 <button className='header__login__btn' onClick={ActiveModal}>
                   <svg className='text-[30px] text-MainColor' xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
@@ -96,6 +99,7 @@ function Header() {
                     </svg>
                   </button>
                 </NavLink>
+
               )}
               <button onClick={toggleMenu} className='header__burger relative z-20 hidden'>
                 <Hamburger size={30} color={`${active ? 'white' : '#1B2A3D'}`} toggled={active} toggle={setActive} />
