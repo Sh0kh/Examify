@@ -1,4 +1,6 @@
-export default function UserBonus({ data }) {
+import React from "react";
+
+export default function Bonus({ data }) {
     const formatDate = (dateString) => {
         if (!dateString) return '';
 
@@ -25,54 +27,41 @@ export default function UserBonus({ data }) {
     };
 
     return (
-        <div className="UserBonus ">
-            <div className="Container">
-                <h1 className="text-center text-[40px] font-bold">
-                    Your Bonus
-                </h1>
-                <div className="border-[2px] border-MainColor p-[30px] rounded-[10px]">
-                    <div>
-                        <h2 className="text-MainColor text-[25px] font-bold">
-                            Your Username: <span className="font-normal">{data?.name}</span>
-                        </h2>
-                        <h2 className="text-MainColor text-[25px] font-bold">
-                            Your Referral Link: <span className="font-normal">{data?.refLink}</span>
-                        </h2>
-                        <h2 className="text-MainColor text-[25px] font-bold">
-                            Registration Time: <span className="font-normal">{formatDate(data?.registeredAt)}</span>
-                        </h2>
-                        <h2 className="text-MainColor text-[25px] font-bold">
-                            Number of Bonuses Used: <span className="font-normal">{data?.bonusCount}</span>
-                        </h2>
-                        <h2 className="text-MainColor text-[25px] font-bold">
-                            Total Users Invited: <span className="font-normal">{data?.welcomeCount}</span>
-                        </h2>
-                    </div>
+        <div className="container min-h-screen">
+            <h1 className="text-3xl font-bold mb-4">Bonus</h1>
+            <div className="mb-6">
+                <p className="text-lg">
+                    <span className="font-semibold">Your Username:</span> {data?.name}
+                </p>
+                <p className="text-lg">
+                    <span className="font-semibold">Your Referral Link:</span> {data?.refLink}
+                </p>
+                <p className="text-lg">
+                    <span className="font-semibold">Registration Time:</span> {formatDate(data?.registeredAt)}
+                </p>
+                <p className="text-lg">
+                    <span className="font-semibold">Number of Bonuses Used:</span> {data?.bonusCount}
+                </p>
+                <p className="text-lg">
+                    <span className="font-semibold">Total Users Invited:</span> {data?.welcomeCount}
+                </p>
+            </div>
 
-                    {/* Bonus CTA Section */}
-                    <div className="mt-8 bg-gradient-to-r from-MainColor to-blue-600 p-6 rounded-lg text-white shadow-lg hover:shadow-xl transition-shadow duration-300">
-                        <div className="flex items-center justify-between">
-                            <div className="space-y-2">
-                                <h3 className="text-2xl font-bold">Do You Want to Get Bonuses? 🎁</h3>
-                                <p className="text-lg opacity-90">
-                                    Collect more bonuses through our Telegram bot!
-                                </p>
-                                <a
-                                    href="https://t.me/codevanbot"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center mt-4 bg-white text-MainColor px-6 py-2 rounded-full font-semibold hover:bg-opacity-90 transition-colors duration-300"
-                                >
-                                    Get Bonus
-                                    <span className="ml-2">➜</span>
-                                </a>
-                            </div>
-                            <div className="hidden md:block text-6xl">
-                                🎉
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <h2 className="text-2xl font-semibold mb-3">Users Joined via Your Referral Link</h2>
+            <p className="text-gray-600 mb-6">You don't have a bonus yet</p>
+
+            {/* Bonus banner */}
+            <div className="bg-gradient-to-r from-pink-500 to-orange-400 p-6 rounded-lg text-white">
+                <h3 className="text-xl font-bold mb-2">Do You Want to Get Bonuses? 🎁</h3>
+                <p className="mb-4">Collect more bonuses through our Telegram bot!</p>
+                <a
+                    href="https://t.me/codevanbot"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white text-gray-900 font-semibold py-2 px-4 rounded flex items-center w-[140px]"
+                >
+                    Get bonus →
+                </a>
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-function Part2({ updateAnswers }) {
+function Part2({answer, updateAnswers }) {
   const [selected1, setSelected1] = useState([]); // For the first question
   const [selected2, setSelected2] = useState([]); // For the second question
   const [selectedOptions, setSelectedOptions] = useState(Array(5).fill('')); // For questions 15-19

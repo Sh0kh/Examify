@@ -1,10 +1,12 @@
-import React from 'react'
-import logo from '../../images/Examify_Dark.jpg'
+import React, { useState } from 'react'
+import logo from '../../images/LogoLightMode.png'
 import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux';
+import ManualModal from './ManualModal';
 
 function HeaderMenu({ isOpen, onClose }) {
     const { data } = useSelector((state) => state.data)
+    const [manualModal, setManualModal] = useState(false);
 
     const handleScrollUp = () => {
         const currentScroll = window.pageYOffset;
@@ -25,6 +27,16 @@ function HeaderMenu({ isOpen, onClose }) {
         localStorage.clear();
         window.location.reload();
     }
+
+    
+  const openManualModal = () => {
+    setManualModal(true); // Открытие модала
+  };
+
+  const closeManualModal = () => {
+    setManualModal(false); // Закрытие модала
+  };
+
 
     return (
         <>
@@ -68,6 +80,11 @@ function HeaderMenu({ isOpen, onClose }) {
                     <NavLink onClick={ScrollandClose} to={`/bonus`} className="font-bold text-[white] text-[20px] transition-all duration-500 hover:tracking-widest">
                         Bonus
                     </NavLink>
+                    <button
+                        onClick={openManualModal} // Открытие модала
+                        className='font-bold text-[20px] transition-all text-[white] duration-500 hover:tracking-widest'>
+                        Manual
+                    </button>
                     {token ? (
                         <button onClick={exit} className='flex items-center gap-[5px] font-bold text-[20px] text-MainColor border-[3px] border-white pl-[10px] pr-[25px] py-[5px] transition-colors duration-[0.6s] rounded-[8px] bg-white hover:bg-transparent hover:text-white'>
                             Logout
@@ -87,6 +104,7 @@ function HeaderMenu({ isOpen, onClose }) {
                     )}
                 </nav>
             </div>
+            <ManualModal isOpen={manualModal} onClose={closeManualModal}/>
         </>
     )
 }

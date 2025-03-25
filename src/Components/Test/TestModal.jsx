@@ -1,4 +1,4 @@
-import axios from '../../Service/axios';
+import { axiosAPI1 } from '../../Service/axios';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -12,7 +12,7 @@ function TestModal({ isOpen, onClose, id }) {
 
     const CreateExam = async () => {
         try {
-            const response = await axios.post(
+            const response = await axiosAPI1.post(
                 '/ielts/exam/create',
                 null,
                 {
@@ -23,7 +23,6 @@ function TestModal({ isOpen, onClose, id }) {
                 }
             );
             const examID = response.data.message;
-            // Dispatch action to set the current component to 'LISTENING'
             dispatch(setComponent('LISTENING'));
             navigate(`/book${id}/${examID}`);
             showSuccessToast();
@@ -31,7 +30,7 @@ function TestModal({ isOpen, onClose, id }) {
         } catch (error) {
             showErrorToast(error?.response?.data?.message || 'Error!');
             console.log(error);
-            if(error.response?.status === 401){
+            if (error.response?.status === 401) {
                 navigate('/login')
             }
         }
@@ -76,17 +75,33 @@ function TestModal({ isOpen, onClose, id }) {
                 }`}
         >
             <div
-                className={`TestModal p-[10px] bg-MainColor rounded-[8px] w-[20%] py-[30px] transform transition-all duration-500 ${isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-75 opacity-0 translate-y-10'
-                    }`}
+                className={`TestModal p-4 sm:p-6 bg-white rounded-[8px] w-[10   0%] sm:w-[50%] lg:w-[28%] transform transition-all duration-500 
+    ${isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-75 opacity-0 translate-y-10'}`}
+
                 onClick={(e) => e.stopPropagation()} // Stops closing when clicking inside the modal
             >
-                <h2 className="text-center text-[white] text-[30px]">Test ?</h2>
-                <div className="flex items-center justify-center gap-[30px] mt-[10px]">
-                    <button onClick={CreateExam} className="bg-[white] p-[10px] rounded-[5px] px-[20px] border-[2px] transition duration-500 hover:bg-transparent hover:text-[white]">
-                        Yes
+                <div className='flex items-center justify-between mb-[10px]'>
+                    <h1 className='text-lg font-semibold'>
+                        Ready to submit tests?
+                    </h1>
+                    <button onClick={onClose} className="text-gray-500 hover:text-gray-700">✖</button>
+                </div>
+                <p className='text-[15px] mb-4'>
+                    Please be aware that if you exit full screen mode or switch to another
+                    tab during the exam, you will be automatically terminated from the
+                    exam.
+                </p>
+                <div className='flex items-center justify-end gap-[10px]'>
+                    <button
+                        onClick={onClose}
+                        className="px-4 py-2 bg-gray-300 rounded-lg"
+                    >
+                        Cancel
                     </button>
-                    <button onClick={onClose} className="bg-[white] p-[10px] rounded-[5px] px-[20px] border-[2px] transition duration-500 hover:bg-transparent hover:text-[white]">
-                        No
+                    <button
+                        onClick={CreateExam}
+                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                        Start
                     </button>
                 </div>
             </div>

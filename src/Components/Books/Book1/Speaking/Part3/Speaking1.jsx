@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import ReactLoading from 'react-loading';
+import { axiosAPI1 } from '../../../../../Service/axios'
+
 
 function Speaking1() {
     const [isRecording, setIsRecording] = useState(false);
@@ -128,7 +129,7 @@ function Speaking1() {
         setLoading(true);
 
         try {
-            const response = await axios.post(
+            const response = await axiosAPI1.post(
                 `/ielts/exam/attempt/create/outline-speaking/${ID}`,
                 formData,
                 {

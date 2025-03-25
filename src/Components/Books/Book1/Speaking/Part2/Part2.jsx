@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import ReactLoading from 'react-loading';
+import { axiosAPI1 } from '../../../../../Service/axios'
+
 
 function Part2() {
     const { ID } = useParams();
@@ -26,7 +28,7 @@ function Part2() {
         setSuccess(null); // Сбрасываем статус отправки
 
         try {
-            const response = await axios.post(
+            const response = await axiosAPI1.post(
                 `/ielts/exam/attempt/create/outline-speaking/${ID}`,
                 formData,
                 {

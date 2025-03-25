@@ -57,16 +57,18 @@ function Speaking() {
     };
 
     return (
-        <div className='flex flex-col h-screen bg-gray-50'>
-            <div className='Speaking flex-1 pt-32 pb-20 overflow-y-auto'>
+        <div className='flex flex-col h-screen container'>
+            <div className='Speaking flex-1 pt-20 pb-20 '>
                 <div className='Container mx-auto max-w-2xl px-4'>
-                    <h1 className='font-bold text-4xl text-center text-black'>Your Speaking Result</h1>
-                    <h2 className='text-center text-2xl text-black'>Your answer</h2>
-                    <div className='mt-8 flex items-center justify-between gap-4'>
+                    <h1 className='font-bold text-4xl  text-black'>Your Speaking Result</h1>
+                    <div className='w-full h-[2px] bg-[#F5F5F5] my-[30px]'>
+                    </div>
+                    <h2 className=' text-2xl text-black'>Your answer</h2>
+                    <div className='mt-8 flex items-center '>
                         {[1, 2, 3].map((num) => (
                             <button
                                 key={num}
-                                className={`w-full py-3 text-lg font-semibold rounded-lg transition duration-300 ${part === num ? 'bg-white text-black border border-black' : 'bg-white text-black border border-black'} hover:bg-black hover:text-white`}
+                                className={`px-4 py-2 text-lg font-semibold rounded-[5px] transition duration-300 ${part === num ? 'bg-blue-500 text-white' : 'bg-white text-black border border-gray-300'} hover:bg-blue-500 hover:text-white`}
                                 onClick={() => setPart(num)}
                             >
                                 Part {num}
@@ -74,13 +76,20 @@ function Speaking() {
                         ))}
                     </div>
                     <div className='mt-5'>
-                        <div className='border-2 border-black rounded-lg p-5 bg-white shadow-md'>
-                            <h1 className='text-2xl font-bold text-black'>Part {data.part_number} Score: {roundToIeltsScore(data.part_band_score)}</h1>
+                        <div className='border-2  rounded-lg p-5 bg-white'>
+                            <h1 className='text-2xl font-bold text-black'>
+                                Part {data.part_number} Score: {data.part_band_score ? roundToIeltsScore(data.part_band_score) : 'Score unavailable'}
+                            </h1>
                             <div className='grid grid-cols-3 gap-4 mt-5'>
                                 {['coherence', 'fluency', 'grammar', 'vocabulary', 'relevance', 'topic_dev'].map((key) => (
-                                    <div key={key} className='text-center border-2 border-black rounded-lg p-3 bg-gray-100'>
-                                        <span className='text-lg block font-medium text-black'>{key.charAt(0).toUpperCase() + key.slice(1)}</span>
-                                        <span className='font-bold text-2xl block text-black'>{roundToIeltsScore(data[`${key}_score`]) || 'N/A'}</span>
+                                    <div key={key} className='text-center rounded-lg p-3 bg-gray-100'>
+                                        <span className='text-lg block font-medium text-[#1B1F26B8]'>{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+
+                                        <span className='font-bold text-2xl block text-black'>
+                                            {data[`${key}_score`] && !isNaN(data[`${key}_score`])
+                                                ? roundToIeltsScore(data[`${key}_score`])
+                                                : 'N/A'}
+                                        </span>
                                     </div>
                                 ))}
                             </div>

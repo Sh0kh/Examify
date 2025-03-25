@@ -5,9 +5,9 @@ import Part3 from './Part3';
 import { useDispatch } from 'react-redux';
 import { setComponent } from '../../../../Redux/ComponentSlice';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { axiosAPI1 } from '../../../../Service/axios'
 
 function Reading() {
     const navigate = useNavigate()
@@ -52,7 +52,7 @@ function Reading() {
                 sectionType: 'READING',
                 userAnswer: userAnswersArray
             }
-            await axios.post('/ielts/exam/attempt/create/inline', answer, {
+            await axiosAPI1.post('/ielts/exam/attempt/create/inline', answer, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
@@ -70,7 +70,7 @@ function Reading() {
 
 
     const showSuccessToast = () => {
-        toast.success('Muvaffaqiyatli!', {
+        toast.success('Successful!', {
             position: 'top-right',
             autoClose: 3000,
             hideProgressBar: false,
@@ -105,7 +105,7 @@ function Reading() {
         <div className='Reading'>
             <div className='Book__header p-[10px] bg-[#b4b0b08c]'>
                 <div className='flex items-center justify-between'>
-                    <h2>Reading  exam</h2>
+                    <h2 className='text-[red]'>Reading  exam</h2>
                     <div className='flex items-center gap-[10px]'>
                         <button onClick={out} className='bg-[red] px-[20px] font-bold py-[7px] rounded-[8px] text-[white] transition duration-500 border-[2px] border-[red] hover:bg-transparent hover:text-[red]'>
                             Leave exam

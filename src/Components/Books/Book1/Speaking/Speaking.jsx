@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { setComponent } from '../../../../Redux/ComponentSlice';
 import { useNavigate } from 'react-router-dom';
 
+
 function Speaking() {
     const navigate = useNavigate();
     const [active, setActive] = useState(1); // Part 1 is active by default
@@ -34,7 +35,7 @@ function Speaking() {
         <div className='Speaking'>
             <div className='Book__header p-[10px] bg-[#b4b0b08c]'>
                 <div className='flex items-center justify-between'>
-                    <h2>Speaking exam</h2>
+                    <h2 className='text-[red]'>Speaking exam</h2>
                     <div className='flex items-center gap-[10px]'>
                         <button onClick={out} className='bg-[red] px-[20px] font-bold py-[7px] rounded-[8px] text-[white] transition duration-500 border-[2px] border-[red] hover:bg-transparent hover:text-[red]'>
                             Leave exam

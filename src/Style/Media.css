@@ -199,6 +199,21 @@
         width: 95%;
         margin: 0 auto;
     }
+    .part1{
+        padding: 5px !important;
+    }
+    .part1 ul{
+        padding: 2px !important;
+    }
+    .part1 li{
+        padding: 2px !important;
+    }
+    .part1 td{
+        padding: 2px !important;
+    }
+   .part1__table{
+    padding: 5px;
+   }
 }
 @media(max-width:500px){
     .Service h1{

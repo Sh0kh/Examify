@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import Top3 from '../Components/Rating/Top3'
 import Table from '../Components/Rating/Table'
-import axios from '../Service/axios'
+// import axios from '../Service/axios'
 import ReactLoading from 'react-loading';
-function Rating() {
+import { axiosAPI1 } from '../Service/axios'
 
+function Rating() {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
-  const getResult = async ()=>{
-    try{
-      const response = await axios.get('/ielts/exam/result/top-exam-result/MONTHLY?page=0&size=10')
+  const getResult = async () => {
+    try {
+      const response = await axiosAPI1.get('/ielts/exam/result/top-exam-result/MONTHLY?page=0&size=10')
       setData(response.data.results || []);
-    }catch(error){
+    } catch (error) {
       console.log(error);
-    }finally{
+    } finally {
       setLoading(false)
     }
   }
-  useEffect(()=>{
+  useEffect(() => {
     getResult()
-  },[])
+  }, [])
 
   if (loading) {
     return (
@@ -30,8 +31,8 @@ function Rating() {
   }
   return (
     <div className='Rating'>
-        <Top3 data={data}/>
-        <Table data={data}/>
+      <Top3 data={data} />
+      <Table data={data} />
     </div>
   )
 }

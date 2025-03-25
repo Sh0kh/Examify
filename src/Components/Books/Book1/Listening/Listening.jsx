@@ -10,6 +10,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import audioFile from './listening_audio_dce7445b-535f-4522-80bd-9eefb6bf9abc.mp3';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { axiosAPI1 } from '../../../../Service/axios'
 
 
 function Listening() {
@@ -84,7 +85,7 @@ function Listening() {
                 userAnswer: userAnswersArray 
             };
 
-            await axios.post('/ielts/exam/attempt/create/inline', answer, {
+            await axiosAPI1.post('/ielts/exam/attempt/create/inline', answer, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`, 
                 },
@@ -102,7 +103,7 @@ function Listening() {
     };
 
     const showSuccessToast = () => {
-        toast.success('Muvaffaqiyatli!', {
+        toast.success('Successful!', {
             position: 'top-right',
             autoClose: 3000,
             hideProgressBar: false,
@@ -137,7 +138,7 @@ function Listening() {
         <div className='Listening'>
             <div className='Book__header p-[10px] bg-[#b4b0b08c]'>
                 <div className='flex items-center justify-between'>
-                    <h2>Listening exam</h2>
+                    <h2 className='text-[red]'>Listening exam</h2>
                     <div className='flex items-center gap-[10px]'>
                         <button onClick={out} className='bg-[red] px-[20px] font-bold py-[7px] rounded-[8px] text-[white] transition duration-500 border-[2px] border-[red] hover:bg-transparent hover:text-[red]'>
                             Leave exam

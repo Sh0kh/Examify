@@ -5,10 +5,10 @@ import Part3 from './Part3';
 import Part4 from './Part4';
 import { useDispatch } from 'react-redux';
 import { setComponent } from '../../../../Redux/ComponentSlice';
-import axios from '../../../../Service/axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import audioFile from './67206a5c7ce106e8b0732669.mp3';
 import { ToastContainer, toast } from 'react-toastify';
+import { axiosAPI1 } from '../../../../Service/axios'
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -24,10 +24,10 @@ function Listening() {
     const [isListeningActive, setIsListeningActive] = useState(false); // Manage if the component is active
 
     const out = () => {
-        navigate(-1); 
+        navigate(-1);
         setTimeout(() => {
-            window.location.reload(); 
-        }, 1000); 
+            window.location.reload();
+        }, 1000);
     };
 
     const parts = [
@@ -44,27 +44,27 @@ function Listening() {
         setAnswers(updatedAnswers); // Устанавливаем обновленный массив в состояние
     };
 
-    // Play audio only when component is active
+
     useEffect(() => {
         if (isListeningActive) {
             const timer = setTimeout(() => {
-                // audio.play().catch(error => {
-                //     console.error('Audio play failed:', error);
-                // });
+                audio.play().catch(error => {
+                    console.error('Audio play failed:', error);
+                });
             }, 1000);
 
             return () => {
                 clearTimeout(timer);
-                audio.pause(); // Pause audio when the component is deactivated
+                audio.pause();
             };
         }
     }, [isListeningActive, audio]);
 
     useEffect(() => {
-        setIsListeningActive(true); // Mark component as active when loaded
+        setIsListeningActive(true);
 
         return () => {
-            setIsListeningActive(false); // Mark component as inactive when unmounted or navigated away
+            setIsListeningActive(false);
         };
     }, []);
 
@@ -74,19 +74,19 @@ function Listening() {
 
     };
 
-    const SendUserAnswer = async () =>{
-        try{
+    const SendUserAnswer = async () => {
+        try {
             const userAnswersArray = answers.map(answer => answer);
-    
+
             const answer = {
                 examId: ID,
                 sectionType: 'LISTENING',
-                userAnswer: userAnswersArray 
+                userAnswer: userAnswersArray
             };
 
-            await axios.post('/ielts/exam/attempt/create/inlin3e', answer, {
+            await axiosAPI1.post('/ielts/exam/attempt/create/inline', answer, {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`, 
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
             });
             showSuccessToast();
@@ -97,12 +97,12 @@ function Listening() {
             if (401 === error.response.data.status) {
                 localStorage.clear(); // Clear localStorage
                 navigate('/login'); // Redirect to login page
-            }            
+            }
         }
     };
 
     const showSuccessToast = () => {
-        toast.success('Muvaffaqiyatli!', {
+        toast.success('Successful!', {
             position: 'top-right',
             autoClose: 3000,
             hideProgressBar: false,
@@ -132,6 +132,7 @@ function Listening() {
             },
         });
     };
+
 
     return (
         <div className='Listening'>

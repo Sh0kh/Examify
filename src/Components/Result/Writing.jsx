@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import foto from '../../images/photo_2024-09-30_17-06-56.jpg';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import ReactLoading from 'react-loading';
+import { axiosAPI1 } from '../../Service/axios';
 
 function Writing() {
     const { ID } = useParams();
@@ -13,7 +13,7 @@ function Writing() {
     useEffect(() => {
         const getWriting = async () => {
             try {
-                const response = await axios.get(`/ielts/exam/result/get-results-outline-writing/${ID}`, {
+                const response = await axiosAPI1.get(`/ielts/exam/result/get-results-outline-writing/${ID}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },

@@ -2,7 +2,7 @@ import React from 'react';
 
 function Part1({ updateAnswers, answers }) {
     return (
-        <div className='border border-gray-300 w-full p-5 mb-[50px]'>
+        <div className='border border-gray-300 w-full p-5 mb-[50px] '>
             <h2 className='font-bold text-xl mb-4'>PART 1 Questions 1-10</h2>
             <div className='mb-4'>
                 <p className='mb-2'>Complete the notes below.</p>

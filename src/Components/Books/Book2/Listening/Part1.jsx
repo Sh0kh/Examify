@@ -3,14 +3,14 @@ export default function Part1({ updateAnswers, answers }) {
 
 
     return (
-        <div className=" mx-auto p-4 border-[1px]">
+        <div className=" mx-auto p-4 border-[1px] part1">
             <h1 className="text-2xl font-bold mb-4">Test 7 LISTENING</h1>
 
             <section className="mb-8">
                 <h2 className="text-xl font-bold mb-2">PART 1 Questions 1-10</h2>
                 <p className="mb-4">Write ONE WORD AND/OR A NUMBER for each answer.</p>
 
-                <div className="bg-white rounded-lg shadow-lg p-6 mb-8 bg-[#0000001c]">
+                <div className="bg-white rounded-lg shadow-lg p-6 mb-8 bg-[#0000001c] part1__table">
                     <h3 className="text-center text-xl font-bold mb-6">
                         Wayside Camera Club membership form
                     </h3>
@@ -67,7 +67,7 @@ export default function Part1({ updateAnswers, answers }) {
                     <p className="mb-4">Write NO MORE THAN TWO WORDS for each answer.</p>
                 </div>
 
-                <div className="bg-white rounded-lg shadow-lg p-6 bg-[#0000001c]">
+                <div className="bg-white rounded-lg shadow-lg p-6 bg-[#0000001c] part1__table">
                     <h3 className="text-center text-xl font-bold mb-6">
                         Photography competitions
                     </h3>

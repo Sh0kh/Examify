@@ -1,71 +1,45 @@
-import React from 'react';
-import foto from '../../images/heroImg1.png';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
 
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-gsap.registerPlugin(useGSAP, ScrollTrigger);
-
-function Hero() {
-  useGSAP(() => {
-    gsap.fromTo(
-        '.Hero__title',
-        { x: '-100%', opacity: 0 },
-        { x: '0%', opacity: 1, duration: 2, ease: 'power2.out' }
-    );
-    gsap.fromTo(
-        '.Hero__foto',
-        { x: '100%', opacity: 0 },
-        { x: '0%', opacity: 1, duration: 2, ease: 'power2.out' }
-    );
-    gsap.fromTo(
-        '.Home_Hero_title3',
-        { y: '100%', opacity: 0 },
-        { y: '0%', opacity: 1, duration: 2, ease: 'power2.out' }
-    );
-  });
-
+export default function Hero() {
   return (
-      <section className='Hero pt-[200px]'>
-        <div className='Container'>
-          <div className='Hero__wrapper flex items-center justify-between'>
-            <div className='Hero__title'>
-              <h1 className='text-[70px] w-[700px] font-bold leading-[90px]'>
-              <span className='bg-MainColor text-white px-[10px] rounded-[5px] cursor-pointer transition-all duration-500 hover:tracking-[10px]'>
-                Examify
-              </span>{' '}
-                to find out your <span className='bg-MainColor text-white px-[10px] rounded-[5px] cursor-pointer transition-all duration-500 hover:tracking-[10px]'>IELTS</span> level
-              </h1>
-              <NavLink
-                  to={'/test'}
-                  className='mt-[20px] w-[100px] flex items-center gap-[5px] font-bold text-[20px] text-[white] border-[3px] border-MainColor px-[25px] py-[5px] transition-colors duration-[0.6s] rounded-[8px] bg-MainColor hover:bg-transparent hover:text-MainColor'
-              >
-                Start
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 24 24"
-                >
-                  <path
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 3h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H9m6-9l-4-4m4 4l-4 4m4-4H5"
-                  />
-                </svg>
-              </NavLink>
-            </div>
-            <div className='Hero__foto'>
-              <img className='w-[380px]' src={foto} alt="Examify Hero" />
-            </div>
+    <div className="Hero mx-auto flex flex-col items-center text-center py-16 px-6 pt-[100px] pb-[100px]">
+      {/* New Feature Tag (скрываем на мобильных) */}
+      <NavLink to={'/multi-level'} className="hidden sm:flex">
+        <div className="flex items-center space-x-4 cursor-pointer shadow-sm p-[4px] border border-[#D5D7DA] rounded-lg">
+          <div className="flex items-center space-x-2 border border-[#D5D7DA] px-[8px] py-[2px] rounded-[5px]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
+              <circle cx="6.5" cy="6" r="4.5" fill="#2970FF" stroke="#D1E0FF" strokeWidth="3" />
+            </svg>
+            <span className="text-sm font-medium text-gray-800">New feature</span>
+          </div>
+          <div className="flex items-center gap-[5px]">
+            <span className="text-sm text-gray-600 font-medium">CEFR level can also be determined</span>
+            <svg className="mb-[3px]" xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+              <path d="M3.8335 8H13.1668M13.1668 8L8.50016 3.33333M13.1668 8L8.50016 12.6667" stroke="#717680" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </div>
         </div>
-      </section>
+      </NavLink>
+
+      {/* Title */}
+      <h1 className="text-[36px] sm:text-[48px] md:text-[60px] font-bold text-gray-900 leading-tight">
+        Examify to find out your <br />
+        <span className="text-blue-600">IELTS</span> and <span className="text-red-600">CEFR</span> levels
+      </h1>
+
+      {/* Description */}
+      <p className="mt-4 text-[16px] sm:text-[18px] md:text-[20px] text-gray-600 max-w-[768px]">
+        This project will perform a very necessary task for you. Try testing
+        yourself with the help of artificial intelligence.
+      </p>
+
+      {/* Call to Action Button */}
+      <Link to="/test" className="mt-6">
+        <button className="px-6 py-3 bg-primary normal-case bg-[#2563EB] text-white rounded-lg text-lg font-medium transition hover:bg-blue-700">
+          Try now
+        </button>
+      </Link>
+    </div>
   );
 }
-
-export default Hero;

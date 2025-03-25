@@ -101,15 +101,15 @@ function Part2({ updateAnswers }) {
       <span className='block mt-3 mb-3'>15. What advice does Dan give about picking mushrooms in parks?</span>
       <ul>
         <li className='flex items-center gap-2'>
-          <input type="radio" name="finalRemark" value="A" onChange={(e) => updateAnswers(4, e.target.value)} />
+          <input type="radio" name="finalRemark1" value="A" onChange={(e) => updateAnswers(4, e.target.value)} />
           <strong>A.</strong> Choose wooded areas.
         </li>
         <li className='flex items-center gap-2'>
-          <input type="radio" name="finalRemark" value="B" onChange={(e) => updateAnswers(4, e.target.value)} />
+          <input type="radio" name="finalRemark1" value="B" onChange={(e) => updateAnswers(4, e.target.value)} />
           <strong>B.</strong> Don't disturb wildlife.
         </li>
         <li className='flex items-center gap-2'>
-          <input type="radio" name="finalRemark" value="C" onChange={(e) => updateAnswers(4, e.target.value)} />
+          <input type="radio" name="finalRemark1" value="C" onChange={(e) => updateAnswers(4, e.target.value)} />
           <strong>C.</strong> Get there early.
         </li>
       </ul>
@@ -117,15 +117,15 @@ function Part2({ updateAnswers }) {
       <span className='block mt-3 mb-3'>16. Dan says it is a good idea for beginners to</span>
       <ul>
         <li className='flex items-center gap-2'>
-          <input type="radio" name="finalRemark" value="A" onChange={(e) => updateAnswers(5, e.target.value)} />
+          <input type="radio" name="finalRemark2" value="A" onChange={(e) => updateAnswers(5, e.target.value)} />
           <strong>A.</strong> use a mushroom app.
         </li>
         <li className='flex items-center gap-2'>
-          <input type="radio" name="finalRemark" value="B" onChange={(e) => updateAnswers(5, e.target.value)} />
+          <input type="radio" name="finalRemark2" value="B" onChange={(e) => updateAnswers(5, e.target.value)} />
           <strong>B.</strong> join a group.
         </li>
         <li className='flex items-center gap-2'>
-          <input type="radio" name="finalRemark" value="C" onChange={(e) => updateAnswers(5, e.target.value)} />
+          <input type="radio" name="finalRemark2" value="C" onChange={(e) => updateAnswers(5, e.target.value)} />
           <strong>C.</strong> take a reference book.
         </li>
       </ul>
@@ -133,15 +133,15 @@ function Part2({ updateAnswers }) {
       <span className='block mt-3 mb-3'>17. What does Dan say is important for conservation?</span>
       <ul>
         <li className='flex items-center gap-2'>
-          <input type="radio" name="finalRemark" value="A" onChange={(e) => updateAnswers(6, e.target.value)} />
+          <input type="radio" name="finalRemark3" value="A" onChange={(e) => updateAnswers(6, e.target.value)} />
           <strong>A.</strong> selecting only fully grown mushrooms
         </li>
         <li className='flex items-center gap-2'>
-          <input type="radio" name="finalRemark" value="B" onChange={(e) => updateAnswers(6, e.target.value)} />
+          <input type="radio" name="finalRemark3" value="B" onChange={(e) => updateAnswers(6, e.target.value)} />
           <strong>B.</strong> picking a limited amount of mushrooms
         </li>
         <li className='flex items-center gap-2'>
-          <input type="radio" name="finalRemark" value="C" onChange={(e) => updateAnswers(6, e.target.value)} />
+          <input type="radio" name="finalRemark3" value="C" onChange={(e) => updateAnswers(6, e.target.value)} />
           <strong>C.</strong> avoiding areas where rare mushroom species grow
         </li>
       </ul>
@@ -149,15 +149,15 @@ function Part2({ updateAnswers }) {
       <span className='block mt-3 mb-3'>18. According to Dan, some varieties of wild mushrooms are in decline because there is</span>
       <ul>
         <li className='flex items-center gap-2'>
-          <input type="radio" name="finalRemark" value="A" onChange={(e) => updateAnswers(7, e.target.value)} />
+          <input type="radio" name="finalRemark4" value="A" onChange={(e) => updateAnswers(7, e.target.value)} />
           <strong>A.</strong> a huge demand for them from restaurants.
         </li>
         <li className='flex items-center gap-2'>
-          <input type="radio" name="finalRemark" value="B" onChange={(e) => updateAnswers(7, e.target.value)} />
+          <input type="radio" name="finalRemark4" value="B" onChange={(e) => updateAnswers(7, e.target.value)} />
           <strong>B.</strong> a lack of rain in this part of the country.
         </li>
         <li className='flex items-center gap-2'>
-          <input type="radio" name="finalRemark" value="C" onChange={(e) => updateAnswers(7, e.target.value)} />
+          <input type="radio" name="finalRemark4" value="C" onChange={(e) => updateAnswers(7, e.target.value)} />
           <strong>C.</strong> a rise in building developments locally.
         </li>
       </ul>
@@ -165,15 +165,15 @@ function Part2({ updateAnswers }) {
       <span className='block mt-3 mb-3'>19. Dan says that when storing mushrooms, people should</span>
       <ul>
         <li className='flex items-center gap-2'>
-          <input type="radio" name="finalRemark" value="A" onChange={(e) => updateAnswers(8, e.target.value)} />
+          <input type="radio" name="finalRemark5" value="A" onChange={(e) => updateAnswers(8, e.target.value)} />
           <strong>A.</strong> keep them in the fridge for no more than two days.
         </li>
         <li className='flex items-center gap-2'>
-          <input type="radio" name="finalRemark" value="B" onChange={(e) => updateAnswers(8, e.target.value)} />
+          <input type="radio" name="finalRemark5" value="B" onChange={(e) => updateAnswers(8, e.target.value)} />
           <strong>B.</strong> keep them in a brown bag in a dark room.
         </li>
         <li className='flex items-center gap-2'>
-          <input type="radio" name="finalRemark" value="C" onChange={(e) => updateAnswers(8, e.target.value)} />
+          <input type="radio" name="finalRemark5" value="C" onChange={(e) => updateAnswers(8, e.target.value)} />
           <strong>C.</strong> leave them for a period after washing them.
         </li>
       </ul>
@@ -181,15 +181,15 @@ function Part2({ updateAnswers }) {
       <span className='block mt-3 mb-3'>20. What does Dan say about trying new varieties of mushrooms?</span>
       <ul>
         <li className='flex items-center gap-2'>
-          <input type="radio" name="finalRemark" value="A" onChange={(e) => updateAnswers(9, e.target.value)} />
+          <input type="radio" name="finalRemark6" value="A" onChange={(e) => updateAnswers(9, e.target.value)} />
           <strong>A.</strong> Experiment with different recipes.
         </li>
         <li className='flex items-center gap-2'>
-          <input type="radio" name="finalRemark" value="B" onChange={(e) => updateAnswers(9, e.target.value)} />
+          <input type="radio" name="finalRemark6" value="B" onChange={(e) => updateAnswers(9, e.target.value)} />
           <strong>B.</strong> Expect some to have a strong taste.
         </li>
         <li className='flex items-center gap-2'>
-          <input type="radio" name="finalRemark" value="C" onChange={(e) => updateAnswers(9, e.target.value)} />
+          <input type="radio" name="finalRemark6" value="C" onChange={(e) => updateAnswers(9, e.target.value)} />
           <strong>C.</strong> Cook them for a long time.
         </li>
       </ul>
